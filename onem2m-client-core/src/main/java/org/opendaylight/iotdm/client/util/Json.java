@@ -16,7 +16,7 @@ import java.util.*;
  * This main class is to meet Onem2m short-version Json Serialization and Deserialization.
  * To enable null value in json message. Any data model should set to specific null value of type,which is in the OneM2M class
  * For example, if want to set Name of Ae is null in Json.
- * new Ae().setName(Json.BIG_INTEGER_NULL).
+ * new Ae().setName(Json.STRING_NULL).
  * So this name of Ae attribute will serialized into NULL value. {"nm":null}
  *
  * @author wenxin shi
