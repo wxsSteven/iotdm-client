@@ -34,6 +34,11 @@ public interface Client {
 
 Currently, implementation of HTTP and Coap are provided.
 
+##Port
+Iotdm Http port:8282 (Maybe changed in future)
+Iotdm Coap port:5683 (Maybe changed in future)
+Iotdm Restconf:8181 (Maybe changed in future)
+
 ##Data Model
 ***Data model*** is generated based on OneM2M XSD file, which is mainly for content carry and exchange. 
 
@@ -153,7 +158,14 @@ public void createAE(){
                 .from("localhost")
                 .requestIdentifier("1234")
                 .name("AE");
+       
 
+       //For Http
+       //request.port(8282); 
+       
+       //For coap
+       //request.port(5683);
+       
 		//Add the data want to create
         Ae ae = new Ae();
         ae.setOr("iphone");
@@ -182,6 +194,12 @@ public void update(){
                 .from("localhost")
                 .requestIdentifier("1234");
 		
+		 //For Http
+       //request.port(8282); 
+       
+       //For coap
+       //request.port(5683);
+       
 		//Add the data want to update
         Ae ae = new Ae();
         ae.setOr("ipad");
@@ -210,6 +228,12 @@ public void retrieve(){
                 .from("localhost")
                 .requestIdentifier("1234");
 
+       //For Http
+       //request.port(8282); 
+       
+       //For coap
+       //request.port(5683);
+       
         client.start();
         Response response=client.send(request);
         client.stop();    
@@ -229,6 +253,12 @@ public void update(){
                 .from("localhost")
                 .requestIdentifier("1234");
 		
+		 //For Http
+       //request.port(8282); 
+       
+       //For coap
+       //request.port(5683);
+       
 		//Add the data want to update
         Ae ae = new Ae();
         
@@ -255,6 +285,12 @@ public void delete(){
                 .from("localhost")
                 .requestIdentifier("1234");
 
+       //For Http
+       //request.port(8282); 
+       
+       //For coap
+       //request.port(5683);
+       
         client.start();
         Response response=client.send(request);
         client.stop();

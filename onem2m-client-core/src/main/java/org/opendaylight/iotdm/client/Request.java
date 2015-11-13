@@ -96,6 +96,12 @@ public class Request {
         return this;
     }
 
+    public Request primitiveContent(PrimitiveContent primitiveContent) {
+        Objects.requireNonNull(primitiveContent);
+        requestPrimitive.setPc(primitiveContent);
+        return this;
+    }
+
     public Request role(Object role) {
         Objects.requireNonNull(role);
         requestPrimitive.setRol(role);
