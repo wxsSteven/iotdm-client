@@ -549,10 +549,8 @@ public class OneM2M {
     }
 
     public enum DiscResType {
-        HIERARCHICAL(BigInteger.valueOf(1)),
-        NON_HIERARCHICAL(BigInteger.valueOf(2)),
-        CSE_ID_AND_RESOURCE_ID(BigInteger.valueOf(3));
-
+        STRUCTURED(BigInteger.valueOf(1)),
+        UNSTRUCTURED(BigInteger.valueOf(2));
 
         private BigInteger value;
 
