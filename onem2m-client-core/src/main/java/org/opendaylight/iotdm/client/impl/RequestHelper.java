@@ -1,23 +1,20 @@
-package org.opendaylight.iotdm.client.util;
+package org.opendaylight.iotdm.client.impl;
 
-import org.junit.Assert;
 import org.onem2m.xml.protocols.Attribute;
 import org.onem2m.xml.protocols.FilterCriteria;
 import org.onem2m.xml.protocols.ResponseTypeInfo;
 import org.onem2m.xml.protocols.Rqp;
 import org.opendaylight.iotdm.client.Request;
+import org.opendaylight.iotdm.client.util.Json;
 import org.opendaylight.iotdm.constant.OneM2M;
 
 import java.math.BigInteger;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by wenxshi on 11/2/15.
  */
-public class Adapter {
+public class RequestHelper {
     private String host;
     private int port;
     private long timeout;
@@ -31,25 +28,25 @@ public class Adapter {
     private HashMap<String, Set<String>> header = new HashMap<>();
     private HashMap<String, Set<String>> fragment = new HashMap<>();
 
-    public Adapter(Request request) {
+    protected RequestHelper(Request request) {
         host = request.getHost();
         port = request.getPort();
         timeout = request.getTimeout();
         contentMIME = request.getContentMIME();
         acceptMIME = request.getAcceptMIME();
 
-        Assert.assertNotNull(host);
-        Assert.assertNotNull(contentMIME);
-        Assert.assertNotNull(acceptMIME);
+        Objects.requireNonNull(host);
+        Objects.requireNonNull(contentMIME);
+        Objects.requireNonNull(acceptMIME);
 
         Rqp requestPrimitive = request.getRequestPrimitive();
-        Assert.assertNotNull(requestPrimitive);
+        Objects.requireNonNull(requestPrimitive);
 
         op = requestPrimitive.getOp();
-        Assert.assertNotNull("operation should not be null",op);
+        Objects.requireNonNull(op, "operation should not be null");
 
         path = requestPrimitive.getTo();
-        Assert.assertNotNull("path should not be null",path);
+        Objects.requireNonNull(path, "path should not be null");
 
 
         adaptQuery(requestPrimitive);
