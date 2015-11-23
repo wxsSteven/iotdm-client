@@ -4,7 +4,7 @@ import org.opendaylight.iotdm.client.Request;
 import org.opendaylight.iotdm.client.api.Client;
 import org.opendaylight.iotdm.client.command.ExecutableFactory;
 import org.opendaylight.iotdm.client.command.api.Executable;
-import org.opendaylight.iotdm.client.command.api.Option;
+import org.opendaylight.iotdm.client.command.api.Argument;
 import org.opendaylight.iotdm.client.impl.Coap;
 
 import java.util.ArrayList;
@@ -17,7 +17,6 @@ public class CoapExecutable implements Executable {
     public final static String NAME = "coap";
     private Request request;
     private Client client;
-    List<Option> options=new ArrayList<Option>();
 
     private CoapExecutable(){
         request=new Request();
@@ -28,7 +27,8 @@ public class CoapExecutable implements Executable {
         ExecutableFactory.register(NAME, new CoapExecutable());
     }
 
-    public void execute(String[] args) {
+    public void execute(List<Argument> arguments) {
+        
         
     }
 
