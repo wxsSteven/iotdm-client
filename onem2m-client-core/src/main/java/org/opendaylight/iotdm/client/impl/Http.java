@@ -8,8 +8,7 @@ import org.onem2m.xml.protocols.PrimitiveContent;
 import org.opendaylight.iotdm.client.Request;
 import org.opendaylight.iotdm.client.Response;
 import org.opendaylight.iotdm.client.api.Client;
-import org.opendaylight.iotdm.client.exception.NoOperationError;
-import org.opendaylight.iotdm.client.util.Adapter;
+import org.opendaylight.iotdm.client.exception.Onem2mNoOperationError;
 import org.opendaylight.iotdm.client.util.Json;
 import org.opendaylight.iotdm.constant.OneM2M;
 
@@ -55,41 +54,8 @@ public class Http implements Client {
 
     @Override
     public Response send(Request request) {
-        Adapter adapt = new Adapter(request);
-        org.eclipse.jetty.client.api.Request httpRequest = httpClient.newRequest(adapt.getHost(), adapt.getPort()).timeout(adapt.getTimeout(), TimeUnit.MILLISECONDS);
 
-        adapt.getQuery().remove(OneM2M.Name.RESOURCE_TYPE);
-        addQuery(httpRequest, adapt.getQuery());
-        addHeader(httpRequest.getHeaders(), adapt.getHeader());
-        httpRequest.accept(adapt.getAcceptMIME());
-        httpRequest.path(OneM2M.Path.toToPathMapping(adapt.getPath()));
-
-        switch (OneM2M.Operation.getEnum(adapt.getOp())) {
-            case CREATE:
-                httpRequest.method(CREATE_IN_HTTP);
-                httpRequest.content(new StringContentProvider(adapt.getPayload()));
-                httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, String.format("%s;%s=%s", adapt.getContentMIME(), OneM2M.Name.RESOURCE_TYPE, request.getRequestPrimitive().getTy()));
-                break;
-            case RETRIEVE:
-                httpRequest.method(RETRIEVE_IN_HTTP);
-                httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, adapt.getContentMIME());
-                break;
-            case UPDATE:
-                httpRequest.method(UPDATE_IN_HTTP);
-                httpRequest.content(new StringContentProvider(adapt.getPayload()));
-                httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, adapt.getContentMIME());
-                break;
-            case DELETE:
-                httpRequest.method(DELETE_IN_HTTP);
-                httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, adapt.getContentMIME());
-                break;
-            case NOTIFY:
-                httpRequest.method(NOTIFY_IN_HTTP);
-                httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, adapt.getContentMIME());
-                break;
-            default:
-                throw new NoOperationError();
-        }
+        org.eclipse.jetty.client.api.Request httpRequest = new HttpRequestBuilder(request).build();
 
         ContentResponse contentResponse;
         try {
@@ -97,61 +63,122 @@ public class Http implements Client {
         } catch (Exception e) {
             throw new AssertionError(e.getMessage());
         }
-        return getResponse(contentResponse);
+
+        Response response = new ResponseBuilder(contentResponse).build();
+        return response;
     }
 
-    private void addHeader(HttpFields httpFields, Map<String, Set<String>> map) {
-        for (Map.Entry<String, Set<String>> entry : map.entrySet()) {
-            String key = OneM2M.Http.Header.map(entry.getKey());
-            String value = Adapter.concatQuery(entry.getValue());
-            httpFields.add(key, value);
-        }
-    }
+    public static class HttpRequestBuilder {
+        org.eclipse.jetty.client.api.Request httpRequest;
 
-    private void addQuery(org.eclipse.jetty.client.api.Request request, Map<String, Set<String>> map) {
-        for (Map.Entry<String, Set<String>> entry : map.entrySet()) {
-            String key = entry.getKey();
-            String value = Adapter.concatQuery(entry.getValue());
-            request.param(key, value);
-        }
-    }
+        public HttpRequestBuilder(Request request) {
+            if (request == null) return;
 
-    private Response getResponse(ContentResponse contentResponse) {
+            RequestHelper requestHelper = new RequestHelper(request);
+            httpRequest = httpClient.newRequest(requestHelper.getHost(), requestHelper.getPort())
+                    .timeout(requestHelper.getTimeout(), TimeUnit.MILLISECONDS);
 
-        OneM2M.ResponseStatusCodes responseStatusCode = null;
-        String requestIdentifier = null;
-        PrimitiveContent primitiveContent = null;
-        String to = null;
-        String from = null;
-        OneM2M.Time originatingTimestamp = null;
-        OneM2M.Time resultExpirationTimestamp = null;
-        OneM2M.StdEventCats eventCategory = null;
+            requestHelper.getQuery().remove(OneM2M.Name.RESOURCE_TYPE);
+            addQuery(httpRequest, requestHelper.getQuery());
+            addHeader(httpRequest.getHeaders(), requestHelper.getHeader());
+            httpRequest.accept(requestHelper.getAcceptMIME());
+            httpRequest.path(OneM2M.Path.toToPathMapping(requestHelper.getPath()));
 
-        HttpFields responseHeader = contentResponse.getHeaders();
-        for (String key : responseHeader.getFieldNamesCollection()) {
-            switch (key) {
-                case OneM2M.Http.Header.X_M2M_RSC:
-                    responseStatusCode = OneM2M.ResponseStatusCodes.getEnum(BigInteger.valueOf(responseHeader.getLongField(key)));
+            switch (OneM2M.Operation.getEnum(requestHelper.getOp())) {
+                case CREATE:
+                    httpRequest.method(CREATE_IN_HTTP);
+                    httpRequest.content(new StringContentProvider(requestHelper.getPayload()));
+                    httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, String.format("%s;%s=%s", requestHelper.getContentMIME(), OneM2M.Name.RESOURCE_TYPE, request.getRequestPrimitive().getTy()));
                     break;
-                case OneM2M.Http.Header.X_M2M_RI:
-                    requestIdentifier = responseHeader.get(key);
+                case RETRIEVE:
+                    httpRequest.method(RETRIEVE_IN_HTTP);
+                    httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
                     break;
-                case OneM2M.Http.Header.X_M2M_ORIGIN:
-                    from = responseHeader.get(key);
+                case UPDATE:
+                    httpRequest.method(UPDATE_IN_HTTP);
+                    httpRequest.content(new StringContentProvider(requestHelper.getPayload()));
+                    httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
                     break;
-                case OneM2M.Http.Header.X_M2M_OT:
-                    originatingTimestamp = new OneM2M.Time(responseHeader.get(key));
+                case DELETE:
+                    httpRequest.method(DELETE_IN_HTTP);
+                    httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
                     break;
-                case OneM2M.Http.Header.X_M2M_RST:
-                    resultExpirationTimestamp = new OneM2M.Time(responseHeader.get(key));
+                case NOTIFY:
+                    httpRequest.method(NOTIFY_IN_HTTP);
+                    httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
                     break;
-                case OneM2M.Http.Header.X_M2M_EC:
-                    eventCategory = OneM2M.StdEventCats.getEnum(new BigInteger(responseHeader.get(key)));
+                default:
+                    throw new Onem2mNoOperationError();
             }
         }
-        String content = contentResponse.getContentAsString();
-        primitiveContent = Json.newInstance().fromJson(content, PrimitiveContent.class);
-        return new Response(responseStatusCode, requestIdentifier, primitiveContent, to, from, originatingTimestamp, resultExpirationTimestamp, eventCategory);
+
+        private void addHeader(HttpFields httpFields, Map<String, Set<String>> map) {
+            for (Map.Entry<String, Set<String>> entry : map.entrySet()) {
+                String key = OneM2M.Http.Header.map(entry.getKey());
+                String value = RequestHelper.concatQuery(entry.getValue());
+                httpFields.add(key, value);
+            }
+        }
+
+        private void addQuery(org.eclipse.jetty.client.api.Request request, Map<String, Set<String>> map) {
+            for (Map.Entry<String, Set<String>> entry : map.entrySet()) {
+                String key = entry.getKey();
+                String value = RequestHelper.concatQuery(entry.getValue());
+                request.param(key, value);
+            }
+        }
+
+        public org.eclipse.jetty.client.api.Request build() {
+            return httpRequest;
+        }
+    }
+
+    public static class ResponseBuilder {
+        private Response response = null;
+
+        public ResponseBuilder(ContentResponse contentResponse) {
+            if (contentResponse == null) return;
+
+            OneM2M.ResponseStatusCodes responseStatusCode = null;
+            String requestIdentifier = null;
+            PrimitiveContent primitiveContent = null;
+            String to = null;
+            String from = null;
+            OneM2M.Time originatingTimestamp = null;
+            OneM2M.Time resultExpirationTimestamp = null;
+            OneM2M.StdEventCats eventCategory = null;
+
+            HttpFields responseHeader = contentResponse.getHeaders();
+            for (String key : responseHeader.getFieldNamesCollection()) {
+                switch (key) {
+                    case OneM2M.Http.Header.X_M2M_RSC:
+                        responseStatusCode = OneM2M.ResponseStatusCodes.getEnum(BigInteger.valueOf(responseHeader.getLongField(key)));
+                        break;
+                    case OneM2M.Http.Header.X_M2M_RI:
+                        requestIdentifier = responseHeader.get(key);
+                        break;
+                    case OneM2M.Http.Header.X_M2M_ORIGIN:
+                        from = responseHeader.get(key);
+                        break;
+                    case OneM2M.Http.Header.X_M2M_OT:
+                        originatingTimestamp = new OneM2M.Time(responseHeader.get(key));
+                        break;
+                    case OneM2M.Http.Header.X_M2M_RST:
+                        resultExpirationTimestamp = new OneM2M.Time(responseHeader.get(key));
+                        break;
+                    case OneM2M.Http.Header.X_M2M_EC:
+                        eventCategory = OneM2M.StdEventCats.getEnum(new BigInteger(responseHeader.get(key)));
+                }
+            }
+            String content = contentResponse.getContentAsString();
+            primitiveContent = Json.newInstance().fromJson(content, PrimitiveContent.class);
+
+            response = new Response(responseStatusCode, requestIdentifier, primitiveContent, to, from, originatingTimestamp, resultExpirationTimestamp, eventCategory);
+        }
+
+        public Response build() {
+            return response;
+        }
     }
 }
 

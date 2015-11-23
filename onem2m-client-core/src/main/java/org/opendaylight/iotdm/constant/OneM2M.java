@@ -1,6 +1,6 @@
 package org.opendaylight.iotdm.constant;
 
-import org.opendaylight.iotdm.client.exception.IncorrectTimeStampError;
+import org.opendaylight.iotdm.client.exception.Onem2mIncorrectTimeStampError;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -1693,7 +1693,7 @@ public class OneM2M {
                 timeStamp = timeStamp.replace(SEPARATOR, FAKE_SEPARATOR);
                 return LocalDateTime.parse(timeStamp, FORMATTER);
             } catch (Exception e) {
-                throw new IncorrectTimeStampError(timeStamp);
+                throw new Onem2mIncorrectTimeStampError(timeStamp);
             }
         }
 
