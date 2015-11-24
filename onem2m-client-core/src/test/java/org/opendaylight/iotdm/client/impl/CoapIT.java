@@ -1,25 +1,19 @@
 package org.opendaylight.iotdm.client.impl;
 
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.onem2m.xml.protocols.Ae;
-import org.onem2m.xml.protocols.Cin;
-import org.onem2m.xml.protocols.Cnt;
-import org.opendaylight.iotdm.client.Request;
-import org.opendaylight.iotdm.client.Response;
 import org.opendaylight.iotdm.client.api.Client;
-import org.opendaylight.iotdm.client.util.Json;
-import org.opendaylight.iotdm.constant.OneM2M;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wenxshi on 11/3/15.
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CoapIT {
-    static Client client=new Coap();
-    ITCase itCase=new ITCase(client,RestConf.HOST,5683,1000);
+    static Client client = new Coap();
+    ITCase itCase = new ITCase(client, RestConf.HOST, 5683, 1000);
 
     @BeforeClass
     public static void suitUp() {
@@ -54,27 +48,27 @@ public class CoapIT {
     }
 
     @Test
-    public void test_5_create_ae_without_request_mandatory_attribute_request_identifier_and_result_expect_error(){
+    public void test_5_create_ae_without_request_mandatory_attribute_request_identifier_and_result_expect_error() {
         itCase.create_ae_without_mandatory_attribute_request_identifier_and_result_expect_error();
     }
 
     @Test
-    public void test_6_create_ae_without_request_mandatory_attribute_from_and_result_expect_error(){
+    public void test_6_create_ae_without_request_mandatory_attribute_from_and_result_expect_error() {
         itCase.create_ae_without_mandatory_attribute_from_and_result_expect_error();
     }
 
     @Test
-    public void test_7_create_ae_without_mandatory_attribute_resource_type_and_result_expect_error(){
+    public void test_7_create_ae_without_mandatory_attribute_resource_type_and_result_expect_error() {
         itCase.create_ae_without_mandatory_attribute_resource_type_and_result_expect_error();
     }
 
     @Test
-    public void test_8_create_ae_with_wrong_resource_type_and_result_expect_error(){
+    public void test_8_create_ae_with_wrong_resource_type_and_result_expect_error() {
         itCase.create_ae_with_wrong_resource_type_and_result_expect_error();
     }
 
     @Test
-    public void test_9_update_ae_with_resource_type_and_result_expect_error(){
+    public void test_9_update_ae_with_resource_type_and_result_expect_error() {
         itCase.update_ae_with_resource_type_and_result_expect_error();
     }
 

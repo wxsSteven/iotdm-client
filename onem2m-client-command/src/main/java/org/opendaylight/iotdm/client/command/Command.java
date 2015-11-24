@@ -82,7 +82,7 @@ public class Command implements Instruction {
 
     public void execute() {
         request = new Request();
-        for(Instruction instruction:instructionChain){
+        for (Instruction instruction : instructionChain) {
             instruction.execute();
         }
 

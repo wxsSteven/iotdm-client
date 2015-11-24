@@ -23,52 +23,52 @@ oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PR
 
 -->
 
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols" 
-	xmlns:m2m="http://www.onem2m.org/xml/protocols" elementFormDefault="unqualified" 
-	attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	
-	<xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" />
-	<xs:include schemaLocation="CDT-subscription-v2_2_0.xsd" />
-	
-	<xs:element name="battery">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit Common Attributes from data type "mgmtResource" -->
-				<xs:extension base="m2m:mgmtResource">
-					<!-- Resource Specific Attributes -->
-					<xs:sequence>
-						<xs:element name="batteryLevel" type="xs:unsignedInt"/>
-						<xs:element name="batteryStatus" type="m2m:batteryStatus" />
-		
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />   
-						</xs:choice>             
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	
-	<xs:element name="batteryAnnc">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit Common Attributes from data type "announcedMgmtResource" -->
-				<xs:extension base="m2m:announcedMgmtResource">
-					<!-- Resource Specific Attributes -->
-					<xs:sequence>
-						<xs:element name="batteryLevel" type="xs:unsignedInt" minOccurs="0" />
-						<xs:element name="batteryStatus" type="m2m:batteryStatus" minOccurs="0" />
-		
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />   
-						</xs:choice>             
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
+           elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+    <xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
+
+    <xs:element name="battery">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from data type "mgmtResource" -->
+                <xs:extension base="m2m:mgmtResource">
+                    <!-- Resource Specific Attributes -->
+                    <xs:sequence>
+                        <xs:element name="batteryLevel" type="xs:unsignedInt"/>
+                        <xs:element name="batteryStatus" type="m2m:batteryStatus"/>
+
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="batteryAnnc">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from data type "announcedMgmtResource" -->
+                <xs:extension base="m2m:announcedMgmtResource">
+                    <!-- Resource Specific Attributes -->
+                    <xs:sequence>
+                        <xs:element name="batteryLevel" type="xs:unsignedInt" minOccurs="0"/>
+                        <xs:element name="batteryStatus" type="m2m:batteryStatus" minOccurs="0"/>
+
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

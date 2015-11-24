@@ -28,21 +28,6 @@ public class ITCase {
         this.timeout = timeout;
     }
 
-    private Request newRequest() {
-        return new Request()
-                .host(host)
-                .port(port)
-                .timeout(timeout, TimeUnit.MILLISECONDS);
-    }
-
-    private Request newCleanRequest(String path){
-        return newRequest()
-                .to(path)
-                .operation(OneM2M.Operation.DELETE)
-                .from(host)
-                .requestIdentifier("1234");
-    }
-
     //InCSE1
     public static void suitUp(String host) {
         RestConf.defaultProvision(host);
@@ -51,6 +36,21 @@ public class ITCase {
     //
     public static void suitDown(String host) {
         RestConf.defaultClear();
+    }
+
+    private Request newRequest() {
+        return new Request()
+                .host(host)
+                .port(port)
+                .timeout(timeout, TimeUnit.MILLISECONDS);
+    }
+
+    private Request newCleanRequest(String path) {
+        return newRequest()
+                .to(path)
+                .operation(OneM2M.Operation.DELETE)
+                .from(host)
+                .requestIdentifier("1234");
     }
 
     //InCSE1->AE
@@ -248,7 +248,7 @@ public class ITCase {
         System.out.println(error);
         String message = error.get(OneM2M.ERROR_INDICATOR).getAsString();
         Assert.assertTrue("This should be error message", error.has(OneM2M.ERROR_INDICATOR));
-        Assert.assertTrue("Error message should indicate tt's wrong to contain resourceType in update",message.contains("resourceType")||message.contains("ty"));
+        Assert.assertTrue("Error message should indicate tt's wrong to contain resourceType in update", message.contains("resourceType") || message.contains("ty"));
     }
 
     public void update_ae_by_delete_one_attribute() {
@@ -277,6 +277,6 @@ public class ITCase {
         System.out.println(error);
         String message = error.get(OneM2M.ERROR_INDICATOR).getAsString();
         Assert.assertTrue("This should be error message", error.has(OneM2M.ERROR_INDICATOR));
-        Assert.assertTrue("Error message should indicate tt's wrong to contain resourceType in update",message.contains("resourceType")||message.contains("ty"));
+        Assert.assertTrue("Error message should indicate tt's wrong to contain resourceType in update", message.contains("resourceType") || message.contains("ty"));
     }
 }

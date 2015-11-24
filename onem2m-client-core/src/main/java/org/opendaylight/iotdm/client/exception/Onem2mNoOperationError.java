@@ -5,7 +5,7 @@ package org.opendaylight.iotdm.client.exception;
  */
 public class Onem2mNoOperationError extends Error {
 
-    public Onem2mNoOperationError(){
+    public Onem2mNoOperationError() {
         super("No operation Error");
     }
 }

@@ -23,60 +23,61 @@ oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PR
 
 -->
 
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
-	xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	elementFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.onem2m.org/xml/protocols" elementFormDefault="unqualified">
 
-	<xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" />
-	<xs:include schemaLocation="CDT-subscription-v2_2_0.xsd" />
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+    <xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
 
-	<xs:element name="locationPolicy">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes for announceable Resources -->
-				<xs:extension base="m2m:announceableResource">
-					<xs:sequence>
-						<!-- Resource Specific Attributes -->
-						<xs:element name="locationSource" type="m2m:locationSource" />
-						<xs:element name="locationUpdatePeriod" type="m2m:listOfDuration" minOccurs="0" />
-						<xs:element name="locationTargetID" type="m2m:nodeID" minOccurs="0" />
-						<xs:element name="locationServer" type="xs:anyURI" minOccurs="0" />
-						<xs:element name="locationContainerID" type="xs:anyURI" minOccurs="0" />
-						<xs:element name="locationContainerName" type="xs:string" minOccurs="0" />
-						<xs:element name="locationStatus" type="xs:string" />
+    <xs:element name="locationPolicy">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes for announceable Resources -->
+                <xs:extension base="m2m:announceableResource">
+                    <xs:sequence>
+                        <!-- Resource Specific Attributes -->
+                        <xs:element name="locationSource" type="m2m:locationSource"/>
+                        <xs:element name="locationUpdatePeriod" type="m2m:listOfDuration" minOccurs="0"/>
+                        <xs:element name="locationTargetID" type="m2m:nodeID" minOccurs="0"/>
+                        <xs:element name="locationServer" type="xs:anyURI" minOccurs="0"/>
+                        <xs:element name="locationContainerID" type="xs:anyURI" minOccurs="0"/>
+                        <xs:element name="locationContainerName" type="xs:string" minOccurs="0"/>
+                        <xs:element name="locationStatus" type="xs:string"/>
 
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" minOccurs="1" maxOccurs="unbounded" />
-							<xs:choice minOccurs="1" maxOccurs="unbounded">
-								<xs:element ref="m2m:subscription"></xs:element>
-							</xs:choice>
-						</xs:choice>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" minOccurs="1"
+                                        maxOccurs="unbounded"/>
+                            <xs:choice minOccurs="1" maxOccurs="unbounded">
+                                <xs:element ref="m2m:subscription"></xs:element>
+                            </xs:choice>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 
-	<xs:element name="locationPolicyAnnc">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes for announced Resources -->
-				<xs:extension base="m2m:announcedResource">
-					<xs:sequence>
-						<!-- Resource Specific Attributes -->
-						<xs:element name="locationSource" type="m2m:locationSource" minOccurs="0" />
-						<xs:element name="locationUpdatePeriod" type="m2m:listOfDuration" minOccurs="0" />
-						<xs:element name="locationTargetID" type="m2m:nodeID" minOccurs="0" />
-						<xs:element name="locationServer" type="xs:anyURI" minOccurs="0" />
-						<xs:element name="locationContainerID" type="xs:anyURI" minOccurs="0" />
-						<xs:element name="locationContainerName" type="xs:string" minOccurs="0" />
-						<xs:element name="locationStatus" type="xs:string" minOccurs="0" />
+    <xs:element name="locationPolicyAnnc">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes for announced Resources -->
+                <xs:extension base="m2m:announcedResource">
+                    <xs:sequence>
+                        <!-- Resource Specific Attributes -->
+                        <xs:element name="locationSource" type="m2m:locationSource" minOccurs="0"/>
+                        <xs:element name="locationUpdatePeriod" type="m2m:listOfDuration" minOccurs="0"/>
+                        <xs:element name="locationTargetID" type="m2m:nodeID" minOccurs="0"/>
+                        <xs:element name="locationServer" type="xs:anyURI" minOccurs="0"/>
+                        <xs:element name="locationContainerID" type="xs:anyURI" minOccurs="0"/>
+                        <xs:element name="locationContainerName" type="xs:string" minOccurs="0"/>
+                        <xs:element name="locationStatus" type="xs:string" minOccurs="0"/>
 
-						<!-- No Child Resources -->
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+                        <!-- No Child Resources -->
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

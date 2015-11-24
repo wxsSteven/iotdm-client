@@ -20,47 +20,47 @@ ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFITS OR OTHER INCI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema"
-        targetNamespace="http://www.onem2m.org/xml/protocols"
-        xmlns:m2m="http://www.onem2m.org/xml/protocols" elementFormDefault="unqualified"
-        xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
+           elementFormDefault="unqualified">
     <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
     <xs:include schemaLocation="CDT-responsePrimitive-v2_2_0.xsd"/>
 
 
-        <xs:element name="notification" type="m2m:notification" />      
+    <xs:element name="notification" type="m2m:notification"/>
 
-        <xs:element name="aggregatedNotification" type="m2m:aggregatedNotification" />
+    <xs:element name="aggregatedNotification" type="m2m:aggregatedNotification"/>
 
-        <xs:complexType name="aggregatedNotification">
-                <xs:sequence>
-                        <xs:element name="notification" type="m2m:notification" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:sequence>
-        </xs:complexType>
+    <xs:complexType name="aggregatedNotification">
+        <xs:sequence>
+            <xs:element name="notification" type="m2m:notification" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
 
-        <xs:complexType name="notification">
-                <xs:sequence>
-                        <xs:element name="notificationEvent" minOccurs="0">
-                            <xs:complexType >
+    <xs:complexType name="notification">
+        <xs:sequence>
+            <xs:element name="notificationEvent" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="representation" type="xs:anyType" minOccurs="0"/>
+                        <xs:element name="operationMonitor" minOccurs="0">
+                            <xs:complexType>
                                 <xs:sequence>
-                                      <xs:element name="representation" type="xs:anyType" minOccurs="0"/>
-                                      <xs:element name="operationMonitor" minOccurs="0">
-                                          <xs:complexType>
-                                               <xs:sequence>
-                                                   <xs:element name="operation" type="m2m:operation" minOccurs="0"/>
-                                                   <xs:element name="originator" type="m2m:ID" minOccurs="0"/>
-                                               </xs:sequence>
-                                         </xs:complexType>
-                                      </xs:element>
+                                    <xs:element name="operation" type="m2m:operation" minOccurs="0"/>
+                                    <xs:element name="originator" type="m2m:ID" minOccurs="0"/>
                                 </xs:sequence>
                             </xs:complexType>
-                        </xs:element>                      
-                        <xs:element name="verificationRequest" type="xs:boolean" minOccurs="0"/>
-                        <xs:element name="subscriptionDeletion" type="xs:boolean" minOccurs="0"/>
-                        <xs:element name="subscriptionReference" type="xs:anyURI" minOccurs="0"/>
-                        <xs:element name="creator" type="m2m:ID" minOccurs="0"/>
-                        <xs:element name="notificationForwardingURI" type="xs:anyURI" minOccurs="0"/>
-                </xs:sequence>
-        </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="verificationRequest" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="subscriptionDeletion" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="subscriptionReference" type="xs:anyURI" minOccurs="0"/>
+            <xs:element name="creator" type="m2m:ID" minOccurs="0"/>
+            <xs:element name="notificationForwardingURI" type="xs:anyURI" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
 
 </xs:schema>

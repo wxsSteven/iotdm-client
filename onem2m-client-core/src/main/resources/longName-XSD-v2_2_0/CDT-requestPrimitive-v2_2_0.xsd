@@ -23,61 +23,61 @@ WITH RESPECT TO ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 	
-      targetNamespace="http://www.onem2m.org/xml/protocols" 
-      xmlns:m2m="http://www.onem2m.org/xml/protocols"
-      elementFormDefault="unqualified" attributeFormDefault="unqualified" >   
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:m2m="http://www.onem2m.org/xml/protocols"
+           targetNamespace="http://www.onem2m.org/xml/protocols"
+           elementFormDefault="unqualified" attributeFormDefault="unqualified">
 
-    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" /> 
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
 
-    <xs:element name="requestPrimitive" >
-      <xs:complexType>
-        <xs:sequence>
-          <!-- parameter "Operation"  -->
-          <xs:element name="operation" type="m2m:operation" minOccurs="1"/>
-          <!-- parameter "To" -->
-          <xs:element name="to" type="xs:anyURI" minOccurs="1"/>
-          <!-- parameter "From" -->
-          <xs:element name="from" type="m2m:ID" minOccurs="1"/>
-          <!-- parameter "Request Identifier" -->
-          <xs:element name="requestIdentifier" type="m2m:requestID" minOccurs="1"/> 
-          <!-- parameter "ResourceType" -->
-          <xs:element name="resourceType" type="m2m:resourceType" minOccurs="0"/>
-          <!-- parameter "Name" -->
-          <xs:element name="name" type="xs:NCName" minOccurs="0"/>
-          <!-- parameter "Content" -->
-          <xs:element name="primitiveContent" type="m2m:primitiveContent" minOccurs="0"/> 
-          <!-- parameter "Role" -->
-          <xs:element name="role" type="xs:anyType" minOccurs="0"/>           
-          <!-- parameter "Originating Timestamp" -->
-          <xs:element name="originatingTimestamp" type="m2m:timestamp" minOccurs="0"/>
-          <!-- parameter "Request Expiration Timestamp" -->
-          <xs:element name="requestExpirationTimestamp" type="m2m:absRelTimestamp" minOccurs="0"/>
-          <!-- parameter "Result Expiration Timestamp" -->
-          <xs:element name="resultExpirationTimestamp" type="m2m:absRelTimestamp" minOccurs="0"/>
-          <!-- parameter "Operation Execution Time" -->
-          <xs:element name="operationExecutionTime" type="m2m:absRelTimestamp" minOccurs="0"/>
-          <!-- parameter "Response Type" -->
-          <xs:element name="responseType" type="m2m:responseTypeInfo" minOccurs="0"/>
-          <!-- parameter "Result Persistence" -->
-          <xs:element name="resultPersistence" type="m2m:absRelTimestamp" minOccurs="0"/>
-          <!-- parameter "Result Content" -->
-          <xs:element name="resultContent" type="m2m:resultContent" minOccurs="0"/>
-          <!-- parameter "Event Category" -->
-          <xs:element name="eventCategory" type="m2m:eventCat" minOccurs="0"/>
-          <!-- parameter "Delivery Aggregation" -->
-          <xs:element name="deliveryAggregation" type="xs:boolean" minOccurs="0"/>
-          <!-- parameter "Group Request Identifier" -->
-          <xs:element name="groupRequestIdentifier" type="xs:string" minOccurs="0"/>        
-          <!-- parameter "Filter Criteria" -->
-          <xs:element name="filterCriteria" type="m2m:filterCriteria" minOccurs="0"/>
-          <!-- parameter "Discovery Result Type" -->
-          <xs:element name="discoveryResultType" type="m2m:discResType" minOccurs="0"/>
-        </xs:sequence> 	       
-      </xs:complexType>
+    <xs:element name="requestPrimitive">
+        <xs:complexType>
+            <xs:sequence>
+                <!-- parameter "Operation"  -->
+                <xs:element name="operation" type="m2m:operation" minOccurs="1"/>
+                <!-- parameter "To" -->
+                <xs:element name="to" type="xs:anyURI" minOccurs="1"/>
+                <!-- parameter "From" -->
+                <xs:element name="from" type="m2m:ID" minOccurs="1"/>
+                <!-- parameter "Request Identifier" -->
+                <xs:element name="requestIdentifier" type="m2m:requestID" minOccurs="1"/>
+                <!-- parameter "ResourceType" -->
+                <xs:element name="resourceType" type="m2m:resourceType" minOccurs="0"/>
+                <!-- parameter "Name" -->
+                <xs:element name="name" type="xs:NCName" minOccurs="0"/>
+                <!-- parameter "Content" -->
+                <xs:element name="primitiveContent" type="m2m:primitiveContent" minOccurs="0"/>
+                <!-- parameter "Role" -->
+                <xs:element name="role" type="xs:anyType" minOccurs="0"/>
+                <!-- parameter "Originating Timestamp" -->
+                <xs:element name="originatingTimestamp" type="m2m:timestamp" minOccurs="0"/>
+                <!-- parameter "Request Expiration Timestamp" -->
+                <xs:element name="requestExpirationTimestamp" type="m2m:absRelTimestamp" minOccurs="0"/>
+                <!-- parameter "Result Expiration Timestamp" -->
+                <xs:element name="resultExpirationTimestamp" type="m2m:absRelTimestamp" minOccurs="0"/>
+                <!-- parameter "Operation Execution Time" -->
+                <xs:element name="operationExecutionTime" type="m2m:absRelTimestamp" minOccurs="0"/>
+                <!-- parameter "Response Type" -->
+                <xs:element name="responseType" type="m2m:responseTypeInfo" minOccurs="0"/>
+                <!-- parameter "Result Persistence" -->
+                <xs:element name="resultPersistence" type="m2m:absRelTimestamp" minOccurs="0"/>
+                <!-- parameter "Result Content" -->
+                <xs:element name="resultContent" type="m2m:resultContent" minOccurs="0"/>
+                <!-- parameter "Event Category" -->
+                <xs:element name="eventCategory" type="m2m:eventCat" minOccurs="0"/>
+                <!-- parameter "Delivery Aggregation" -->
+                <xs:element name="deliveryAggregation" type="xs:boolean" minOccurs="0"/>
+                <!-- parameter "Group Request Identifier" -->
+                <xs:element name="groupRequestIdentifier" type="xs:string" minOccurs="0"/>
+                <!-- parameter "Filter Criteria" -->
+                <xs:element name="filterCriteria" type="m2m:filterCriteria" minOccurs="0"/>
+                <!-- parameter "Discovery Result Type" -->
+                <xs:element name="discoveryResultType" type="m2m:discResType" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
     </xs:element>
-  
-    <xs:element name="attributeList" type="m2m:attributeList"  />
-  
+
+    <xs:element name="attributeList" type="m2m:attributeList"/>
+
 </xs:schema> 
 

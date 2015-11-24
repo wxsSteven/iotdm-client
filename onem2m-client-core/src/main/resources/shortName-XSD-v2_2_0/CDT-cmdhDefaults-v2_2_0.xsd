@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?> 
+<?xml version="1.0" encoding="utf-8"?>
 <!-- 
 Copyright Notification
 
@@ -23,27 +23,29 @@ WITH RESPECT TO ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema targetNamespace="http://www.onem2m.org/xml/protocols" xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">   
-  
-  <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/> 
-  
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.onem2m.org/xml/protocols" attributeFormDefault="unqualified"
+           elementFormDefault="unqualified">
+
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+
     <xs:element name="cmdf">
-      <xs:complexType>
-        <xs:complexContent>
-          <!-- Inherit Common Attributes from data type "mgmtResource" -->
-          <xs:extension base="m2m:mgmtResource">
-	          <xs:sequence>
-	            <!-- this resource type has no mgmtObj specialization-specific Attributes -->
-	            <!-- Instantiations of this [cmdhDefaults] resource type shall include mgmntLink's to
-	               the following children:
-              1 or more mgmtLink to instance(s) of resource type [cmdhDefEcValue]
-	            1 or more mgmtLink to instance(s) of resource type [cmdhEcDefParamValues]              -->	    
-	            <!-- TODO: text in Table D.12.2-2 column "Default Value and Constraints" needs to be updated
-	                       ref to [cmdhEcDefParamValues] is missing  -->
-              <xs:element name="cmlk" type="m2m:mgmtLinkRef" minOccurs="2" maxOccurs="unbounded"/>
-            </xs:sequence>
-          </xs:extension>  
-        </xs:complexContent>
-      </xs:complexType>
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from data type "mgmtResource" -->
+                <xs:extension base="m2m:mgmtResource">
+                    <xs:sequence>
+                        <!-- this resource type has no mgmtObj specialization-specific Attributes -->
+                        <!-- Instantiations of this [cmdhDefaults] resource type shall include mgmntLink's to
+                           the following children:
+                      1 or more mgmtLink to instance(s) of resource type [cmdhDefEcValue]
+                        1 or more mgmtLink to instance(s) of resource type [cmdhEcDefParamValues]              -->
+                        <!-- TODO: text in Table D.12.2-2 column "Default Value and Constraints" needs to be updated
+                                   ref to [cmdhEcDefParamValues] is missing  -->
+                        <xs:element name="cmlk" type="m2m:mgmtLinkRef" minOccurs="2" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
     </xs:element>
 </xs:schema>

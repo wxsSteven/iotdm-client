@@ -22,37 +22,37 @@ ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFITS OR OTHER INCI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
-	xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	elementFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.onem2m.org/xml/protocols" elementFormDefault="unqualified">
 
-	<xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" />
-	<xs:include schemaLocation="CDT-subscription-v2_2_0.xsd" />
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+    <xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
 
-	<xs:element name="statsCollect">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes -->
-				<xs:extension base="m2m:regularResource">
-					<xs:sequence>
-						<!-- Resource Specific Attributes -->
-						<xs:element name="creator" type="m2m:ID" />
-						<xs:element name="statsCollectID" type="xs:string" />
-						<xs:element name="collectingEntityID" type="m2m:ID" />
-                        <xs:element name="collectedEntityID" type="m2m:ID" />						
-						<xs:element name="statsRuleStatus" type="m2m:statsRuleStatusType" />
-						<xs:element name="statModel" type="m2m:statModelType" />
-						<xs:element name="collectPeriod" type="m2m:scheduleEntries" minOccurs="0" />
-                        <xs:element name="eventID" type="xs:string" minOccurs="0" />
-                        
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />
-						</xs:choice>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+    <xs:element name="statsCollect">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes -->
+                <xs:extension base="m2m:regularResource">
+                    <xs:sequence>
+                        <!-- Resource Specific Attributes -->
+                        <xs:element name="creator" type="m2m:ID"/>
+                        <xs:element name="statsCollectID" type="xs:string"/>
+                        <xs:element name="collectingEntityID" type="m2m:ID"/>
+                        <xs:element name="collectedEntityID" type="m2m:ID"/>
+                        <xs:element name="statsRuleStatus" type="m2m:statsRuleStatusType"/>
+                        <xs:element name="statModel" type="m2m:statModelType"/>
+                        <xs:element name="collectPeriod" type="m2m:scheduleEntries" minOccurs="0"/>
+                        <xs:element name="eventID" type="xs:string" minOccurs="0"/>
+
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

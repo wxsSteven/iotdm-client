@@ -22,32 +22,32 @@ ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFITS OR OTHER INCI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
-	xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	elementFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.onem2m.org/xml/protocols" elementFormDefault="unqualified">
 
-	<xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" />
-	<xs:include schemaLocation="CDT-subscription-v2_2_0.xsd" />
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+    <xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
 
-	<xs:element name="serviceSubscribedAppRule">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes -->
-				<xs:extension base="m2m:regularResource">
-					<xs:sequence>
-						<!-- Resource Specific Attributes -->
-						<xs:element name="applicableCredIDs" type="m2m:listOfM2MID" minOccurs="0" />
-						<xs:element name="allowedApp-IDs" type="m2m:listOfM2MID" minOccurs="0" />
-						<xs:element name="allowedAEs" type="m2m:listOfM2MID" minOccurs="0" />
+    <xs:element name="serviceSubscribedAppRule">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes -->
+                <xs:extension base="m2m:regularResource">
+                    <xs:sequence>
+                        <!-- Resource Specific Attributes -->
+                        <xs:element name="applicableCredIDs" type="m2m:listOfM2MID" minOccurs="0"/>
+                        <xs:element name="allowedApp-IDs" type="m2m:listOfM2MID" minOccurs="0"/>
+                        <xs:element name="allowedAEs" type="m2m:listOfM2MID" minOccurs="0"/>
 
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />
-						</xs:choice>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

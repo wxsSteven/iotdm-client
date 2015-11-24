@@ -23,51 +23,52 @@ WITH RESPECT TO ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 	
-  targetNamespace="http://www.onem2m.org/xml/protocols" 
-  xmlns:m2m="http://www.onem2m.org/xml/protocols"
-  elementFormDefault="unqualified" attributeFormDefault="unqualified" >   
-  
-  <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" /> 
-  
-  <xs:element name="cmdhLimits">
-    <xs:complexType>
-      
-      <xs:complexContent>
-        <!-- Inherit Common Attributes from data type "mgmtResource" -->
-        <xs:extension base="m2m:mgmtResource">
-          <xs:sequence>
-            <!-- mgmtObj specialization-specific Attributes -->
-            <xs:element name="order" type="xs:positiveInteger" />
-            <xs:element name="requestOrigin" type="m2m:listOfM2MID" />
-            <xs:element name="requestContext" type="xs:anyType" />
-            <xs:element name="requestContextNotification" type="xs:boolean"  minOccurs="0" />
-            <xs:element name="requestCharacteristics" type="xs:anyType"  />
-            <xs:element name="limitsEventCategory" type="m2m:listOfEventCat" />
-            <xs:element name="limitsRequestExpTime" type="m2m:listOfMinMax" />
-            <xs:element name="limitsResultExpTime" type="m2m:listOfMinMax" />
-            <xs:element name="limitsOpExecTime" type="m2m:listOfMinMax" />
-            <xs:element name="limitsRespPersistence" type="m2m:listOfMinMax" />
-            <xs:element name="limitsDelAggregation" >
-                <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                    <xs:annotation>
-                        <xs:documentation>defines data type denoted "restricted list of xs:boolean" in TS-0004 D.12.5
-                        </xs:documentation>
-                    </xs:annotation>
-                    <!-- False -->
-                    <xs:enumeration value="0" />
-                    <!-- True -->
-                    <xs:enumeration value="1" />
-                    <!-- True and False -->
-                    <xs:enumeration value="0 1" />
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>         
-          </xs:sequence>
-        </xs:extension>  
-      </xs:complexContent> 	    
-    </xs:complexType>
-  </xs:element>
-  
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:m2m="http://www.onem2m.org/xml/protocols"
+           targetNamespace="http://www.onem2m.org/xml/protocols"
+           elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+
+    <xs:element name="cmdhLimits">
+        <xs:complexType>
+
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from data type "mgmtResource" -->
+                <xs:extension base="m2m:mgmtResource">
+                    <xs:sequence>
+                        <!-- mgmtObj specialization-specific Attributes -->
+                        <xs:element name="order" type="xs:positiveInteger"/>
+                        <xs:element name="requestOrigin" type="m2m:listOfM2MID"/>
+                        <xs:element name="requestContext" type="xs:anyType"/>
+                        <xs:element name="requestContextNotification" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="requestCharacteristics" type="xs:anyType"/>
+                        <xs:element name="limitsEventCategory" type="m2m:listOfEventCat"/>
+                        <xs:element name="limitsRequestExpTime" type="m2m:listOfMinMax"/>
+                        <xs:element name="limitsResultExpTime" type="m2m:listOfMinMax"/>
+                        <xs:element name="limitsOpExecTime" type="m2m:listOfMinMax"/>
+                        <xs:element name="limitsRespPersistence" type="m2m:listOfMinMax"/>
+                        <xs:element name="limitsDelAggregation">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:token">
+                                    <xs:annotation>
+                                        <xs:documentation>defines data type denoted "restricted list of xs:boolean" in
+                                            TS-0004 D.12.5
+                                        </xs:documentation>
+                                    </xs:annotation>
+                                    <!-- False -->
+                                    <xs:enumeration value="0"/>
+                                    <!-- True -->
+                                    <xs:enumeration value="1"/>
+                                    <!-- True and False -->
+                                    <xs:enumeration value="0 1"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
 </xs:schema> 

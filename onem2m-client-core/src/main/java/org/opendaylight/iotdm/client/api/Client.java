@@ -19,6 +19,7 @@ public interface Client {
 
     /**
      * Send request and get response
+     *
      * @param request
      * @return
      */

@@ -13,7 +13,7 @@ import org.opendaylight.iotdm.client.api.Client;
  */
 public class CoapTest {
     @Rule
-    public JUnitRuleMockery context = new JUnitRuleMockery(){{
+    public JUnitRuleMockery context = new JUnitRuleMockery() {{
         setImposteriser(ClassImposteriser.INSTANCE);
     }};
 

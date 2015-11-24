@@ -23,66 +23,66 @@ oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PR
 
 -->
 
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols" 
-	xmlns:m2m="http://www.onem2m.org/xml/protocols" elementFormDefault="unqualified" 
-	attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	
-	<xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" />
-	<xs:include schemaLocation="CDT-subscription-v2_2_0.xsd" />
-	
-	<xs:element name="software">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit Common Attributes from data type "mgmtResource" -->
-				<xs:extension base="m2m:mgmtResource">
-					<!-- Resource Specific Attributes -->
-					<xs:sequence>
-						<xs:element name="version" type="xs:string" />
-						<xs:element name="softwareName" type="xs:string" />
-						<xs:element name="URL" type="xs:anyURI" />
-						<xs:element name="install" type="xs:boolean" />
-						<xs:element name="uninstall" type="xs:boolean" />
-						<xs:element name="installStatus" type="m2m:actionStatus" />
-						<xs:element name="activate" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="deactivate" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="activeStatus" type="m2m:actionStatus" minOccurs="0"/>
-              
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />
-						</xs:choice>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	
-	<xs:element name="softwareAnnc">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit Common Attributes from data type "announcedMgmtResource" -->
-				<xs:extension base="m2m:announcedMgmtResource">
-					<!-- Resource Specific Attributes -->
-					<xs:sequence>
-						<xs:element name="version" type="xs:string" minOccurs="0" />
-						<xs:element name="softwareName" type="xs:string" minOccurs="0" />
-						<xs:element name="URL" type="xs:anyURI" minOccurs="0" />
-						<xs:element name="install" type="xs:boolean" minOccurs="0" />
-						<xs:element name="uninstall" type="xs:boolean" minOccurs="0" />
-						<xs:element name="installStatus" type="m2m:actionStatus" minOccurs="0" />
-						<xs:element name="activate" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="deactivate" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="activeStatus" type="m2m:actionStatus" minOccurs="0"/>
-              
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />
-						</xs:choice>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
+           elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+    <xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
+
+    <xs:element name="software">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from data type "mgmtResource" -->
+                <xs:extension base="m2m:mgmtResource">
+                    <!-- Resource Specific Attributes -->
+                    <xs:sequence>
+                        <xs:element name="version" type="xs:string"/>
+                        <xs:element name="softwareName" type="xs:string"/>
+                        <xs:element name="URL" type="xs:anyURI"/>
+                        <xs:element name="install" type="xs:boolean"/>
+                        <xs:element name="uninstall" type="xs:boolean"/>
+                        <xs:element name="installStatus" type="m2m:actionStatus"/>
+                        <xs:element name="activate" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="deactivate" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="activeStatus" type="m2m:actionStatus" minOccurs="0"/>
+
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="softwareAnnc">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from data type "announcedMgmtResource" -->
+                <xs:extension base="m2m:announcedMgmtResource">
+                    <!-- Resource Specific Attributes -->
+                    <xs:sequence>
+                        <xs:element name="version" type="xs:string" minOccurs="0"/>
+                        <xs:element name="softwareName" type="xs:string" minOccurs="0"/>
+                        <xs:element name="URL" type="xs:anyURI" minOccurs="0"/>
+                        <xs:element name="install" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="uninstall" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="installStatus" type="m2m:actionStatus" minOccurs="0"/>
+                        <xs:element name="activate" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="deactivate" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="activeStatus" type="m2m:actionStatus" minOccurs="0"/>
+
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

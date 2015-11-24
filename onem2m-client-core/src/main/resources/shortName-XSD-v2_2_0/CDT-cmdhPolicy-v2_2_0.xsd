@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?> 
+<?xml version="1.0" encoding="utf-8"?>
 <!-- 
 Copyright Notification
 
@@ -23,29 +23,31 @@ WITH RESPECT TO ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema targetNamespace="http://www.onem2m.org/xml/protocols" xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">   
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.onem2m.org/xml/protocols" attributeFormDefault="unqualified"
+           elementFormDefault="unqualified">
 
-    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/> 
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
 
     <xs:element name="cmp">
-      <xs:complexType>
-        <xs:complexContent>
-          <!-- Inherit Common Attributes from data type "mgmtResource" -->
-          <xs:extension base="m2m:mgmtResource">
-	        <xs:sequence>
-           <!-- mgmtObj specialization-specific Attributes -->
-              <xs:element name="cpn" type="xs:string" minOccurs="1" maxOccurs="1"/>
-	          <!-- Instantiations of this [cmdhPolicy] resource type shall include mgmntLink's to
-	               the following children:
-	            1 mgmtLink to an instance of resource type [cmdhDefaults], 
-	            1 or more mgmtLink to instance(s) of resource type [cmdhLimits], 
-	            1 or more mgmtLink to instance(s) of resource type [cmdhNetworkAccessRules]
-	            1 or more mgmtLink to instance(s) of resource type [cmdhBuffer]              -->
-	          <xs:element name="cmlk" type="m2m:mgmtLinkRef" minOccurs="4" maxOccurs="unbounded"/>
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from data type "mgmtResource" -->
+                <xs:extension base="m2m:mgmtResource">
+                    <xs:sequence>
+                        <!-- mgmtObj specialization-specific Attributes -->
+                        <xs:element name="cpn" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                        <!-- Instantiations of this [cmdhPolicy] resource type shall include mgmntLink's to
+                             the following children:
+                          1 mgmtLink to an instance of resource type [cmdhDefaults],
+                          1 or more mgmtLink to instance(s) of resource type [cmdhLimits],
+                          1 or more mgmtLink to instance(s) of resource type [cmdhNetworkAccessRules]
+                          1 or more mgmtLink to instance(s) of resource type [cmdhBuffer]              -->
+                        <xs:element name="cmlk" type="m2m:mgmtLinkRef" minOccurs="4" maxOccurs="unbounded"/>
 
-            </xs:sequence>
-          </xs:extension> 
-        </xs:complexContent> 	       
-      </xs:complexType>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
     </xs:element>
 </xs:schema>

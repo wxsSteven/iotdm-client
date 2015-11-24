@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?> 
+<?xml version="1.0" encoding="utf-8"?>
 <!-- 
 Copyright Notification
 
@@ -22,58 +22,60 @@ ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFITS OR OTHER INCI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols" xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
+           attributeFormDefault="unqualified" elementFormDefault="unqualified">
 
-	<xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
-	<xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
-	
-	<xs:element name="dvc">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes from mgmtResource  -->
-				<xs:extension base="m2m:mgmtResource">
-					<xs:sequence>
-						<!-- Resource Specific Attributes  -->
-						<xs:element name="can" type="xs:string"/>
-						<xs:element name="att" type="xs:boolean"/>
-						<xs:element name="cas" type="m2m:actionStatus"/>
-						<xs:element name="cus" type="xs:boolean"/>
-						<xs:element name="ena" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="dis" type="xs:boolean" minOccurs="0"/>
-			  
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="ch" type="m2m:childResourceRef" maxOccurs="unbounded"/>
-							<xs:element ref="m2m:sub" maxOccurs="unbounded"/>  
-						</xs:choice>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	
-	<xs:element name="dvcA">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes from announcedMgmtResource  -->
-				<xs:extension base="m2m:announcedMgmtResource">
-					<xs:sequence>
-						<!-- Resource Specific Attributes  -->
-						<xs:element name="can" type="xs:string" minOccurs="0"/>
-						<xs:element name="att" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="cas" type="m2m:actionStatus" minOccurs="0"/>
-						<xs:element name="cus" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="ena" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="dis" type="xs:boolean" minOccurs="0"/>
-			  
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="ch" type="m2m:childResourceRef" maxOccurs="unbounded"/>
-							<xs:element ref="m2m:sub" maxOccurs="unbounded"/>  
-						</xs:choice>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+    <xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
+
+    <xs:element name="dvc">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes from mgmtResource  -->
+                <xs:extension base="m2m:mgmtResource">
+                    <xs:sequence>
+                        <!-- Resource Specific Attributes  -->
+                        <xs:element name="can" type="xs:string"/>
+                        <xs:element name="att" type="xs:boolean"/>
+                        <xs:element name="cas" type="m2m:actionStatus"/>
+                        <xs:element name="cus" type="xs:boolean"/>
+                        <xs:element name="ena" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="dis" type="xs:boolean" minOccurs="0"/>
+
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="ch" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:sub" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="dvcA">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes from announcedMgmtResource  -->
+                <xs:extension base="m2m:announcedMgmtResource">
+                    <xs:sequence>
+                        <!-- Resource Specific Attributes  -->
+                        <xs:element name="can" type="xs:string" minOccurs="0"/>
+                        <xs:element name="att" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="cas" type="m2m:actionStatus" minOccurs="0"/>
+                        <xs:element name="cus" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="ena" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="dis" type="xs:boolean" minOccurs="0"/>
+
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="ch" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:sub" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

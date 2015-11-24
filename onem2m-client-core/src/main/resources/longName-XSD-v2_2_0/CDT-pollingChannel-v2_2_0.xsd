@@ -23,26 +23,26 @@ oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PR
 
 -->
 
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
-	xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	elementFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.onem2m.org/xml/protocols" elementFormDefault="unqualified">
 
-	<xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" />
-	<xs:include schemaLocation="CDT-subscription-v2_2_0.xsd" />
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+    <xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
 
-	<xs:element name="pollingChannel">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes -->
-				<xs:extension base="m2m:regularResource">
-					<xs:sequence>
-						<!-- No Resource Specific Attributes -->
+    <xs:element name="pollingChannel">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes -->
+                <xs:extension base="m2m:regularResource">
+                    <xs:sequence>
+                        <!-- No Resource Specific Attributes -->
 
-						<!-- Virtual Child Resource -->
-						<xs:element name="pollingChannelURI" type="xs:anyURI" />
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+                        <!-- Virtual Child Resource -->
+                        <xs:element name="pollingChannelURI" type="xs:anyURI"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

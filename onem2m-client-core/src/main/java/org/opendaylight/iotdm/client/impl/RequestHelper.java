@@ -55,6 +55,17 @@ public class RequestHelper {
         adaptPayload(requestPrimitive);
     }
 
+    public static String concatQuery(Collection<String> collection) {
+        StringBuilder sb = new StringBuilder();
+        for (String str : collection) {
+            if (str != null) {
+                sb.append("+");
+                sb.append(str);
+            }
+        }
+        return sb.length() > 0 ? sb.substring("+".length()) : "";
+    }
+
     private void adaptQuery(Rqp requestPrimitive) {
         if (requestPrimitive.getRt() != null)
             add(query, OneM2M.Name.RESPONSE_TYPE_VALUE, requestPrimitive.getRt().getRtv());
@@ -178,16 +189,5 @@ public class RequestHelper {
 
     public HashMap<String, Set<String>> getFragment() {
         return fragment;
-    }
-
-    public static String concatQuery(Collection<String> collection) {
-        StringBuilder sb = new StringBuilder();
-        for (String str : collection) {
-            if (str != null) {
-                sb.append("+");
-                sb.append(str);
-            }
-        }
-        return sb.length() > 0 ? sb.substring("+".length()) : "";
     }
 }

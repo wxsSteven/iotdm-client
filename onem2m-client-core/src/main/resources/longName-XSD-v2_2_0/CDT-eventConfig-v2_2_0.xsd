@@ -22,40 +22,40 @@ ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFITS OR OTHER INCI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
-	xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	elementFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.onem2m.org/xml/protocols" elementFormDefault="unqualified">
 
-	<xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" />
-	<xs:include schemaLocation="CDT-subscription-v2_2_0.xsd" />
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+    <xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
 
-	<xs:element name="eventConfig">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes -->
-				<xs:extension base="m2m:regularResource">
-					<xs:sequence>
-						<!-- Resource Specific Attributes -->
-						<xs:element name="creator" type="m2m:ID" />
-						<xs:element name="eventID" type="xs:string" />
-						<xs:element name="eventType" type="m2m:eventType" />
-						<xs:element name="eventStart" type="m2m:timestamp" minOccurs="0" />
-						<xs:element name="eventEnd" type="m2m:timestamp" minOccurs="0" />
-						<xs:element name="operationType" minOccurs="0">
-							<xs:simpleType>
-								<xs:list itemType="m2m:operation" />
-							</xs:simpleType>
-						</xs:element>
-						<xs:element name="dataSize" type="xs:nonNegativeInteger" minOccurs="0" />
+    <xs:element name="eventConfig">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes -->
+                <xs:extension base="m2m:regularResource">
+                    <xs:sequence>
+                        <!-- Resource Specific Attributes -->
+                        <xs:element name="creator" type="m2m:ID"/>
+                        <xs:element name="eventID" type="xs:string"/>
+                        <xs:element name="eventType" type="m2m:eventType"/>
+                        <xs:element name="eventStart" type="m2m:timestamp" minOccurs="0"/>
+                        <xs:element name="eventEnd" type="m2m:timestamp" minOccurs="0"/>
+                        <xs:element name="operationType" minOccurs="0">
+                            <xs:simpleType>
+                                <xs:list itemType="m2m:operation"/>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="dataSize" type="xs:nonNegativeInteger" minOccurs="0"/>
 
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />
-						</xs:choice>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

@@ -23,62 +23,62 @@ oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PR
 
 -->
 
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols" 
-	xmlns:m2m="http://www.onem2m.org/xml/protocols" elementFormDefault="unqualified" 
-	attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
+           elementFormDefault="unqualified" attributeFormDefault="unqualified">
 
-	<xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" />
-	<xs:include schemaLocation="CDT-subscription-v2_2_0.xsd" />
-	
-	<xs:element name="deviceInfo">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes from mgmtResource  -->
-				<xs:extension base="m2m:mgmtResource">
-					<xs:sequence>
-						<!-- Resource Specific Attributes  -->
-						<xs:element name="deviceLabel" type="xs:string" />
-						<xs:element name="manufacturer" type="xs:string" />
-						<xs:element name="model" type="xs:string" />
-						<xs:element name="deviceType" type="xs:string" />
-						<xs:element name="fwVersion" type="xs:string" />
-						<xs:element name="swVersion" type="xs:string" />
-						<xs:element name="hwVersion" type="xs:string" />
-			   
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />
-						</xs:choice>  
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	
-	<xs:element name="deviceInfoAnnc">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes from announcedMgmtResource  -->
-				<xs:extension base="m2m:announcedMgmtResource">
-					<xs:sequence>
-						<!-- Resource Specific Attributes  -->
-						<xs:element name="deviceLabel" type="xs:string" minOccurs="0" />
-						<xs:element name="manufacturer" type="xs:string" minOccurs="0" />
-						<xs:element name="model" type="xs:string" minOccurs="0" />
-						<xs:element name="deviceType" type="xs:string" minOccurs="0" />
-						<xs:element name="fwVersion" type="xs:string" minOccurs="0" />
-						<xs:element name="swVersion" type="xs:string" minOccurs="0" />
-						<xs:element name="hwVersion" type="xs:string" minOccurs="0" />
-			   
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />
-						</xs:choice>  
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+    <xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
+
+    <xs:element name="deviceInfo">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes from mgmtResource  -->
+                <xs:extension base="m2m:mgmtResource">
+                    <xs:sequence>
+                        <!-- Resource Specific Attributes  -->
+                        <xs:element name="deviceLabel" type="xs:string"/>
+                        <xs:element name="manufacturer" type="xs:string"/>
+                        <xs:element name="model" type="xs:string"/>
+                        <xs:element name="deviceType" type="xs:string"/>
+                        <xs:element name="fwVersion" type="xs:string"/>
+                        <xs:element name="swVersion" type="xs:string"/>
+                        <xs:element name="hwVersion" type="xs:string"/>
+
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deviceInfoAnnc">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes from announcedMgmtResource  -->
+                <xs:extension base="m2m:announcedMgmtResource">
+                    <xs:sequence>
+                        <!-- Resource Specific Attributes  -->
+                        <xs:element name="deviceLabel" type="xs:string" minOccurs="0"/>
+                        <xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+                        <xs:element name="model" type="xs:string" minOccurs="0"/>
+                        <xs:element name="deviceType" type="xs:string" minOccurs="0"/>
+                        <xs:element name="fwVersion" type="xs:string" minOccurs="0"/>
+                        <xs:element name="swVersion" type="xs:string" minOccurs="0"/>
+                        <xs:element name="hwVersion" type="xs:string" minOccurs="0"/>
+
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

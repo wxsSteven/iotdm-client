@@ -23,25 +23,25 @@ WITH RESPECT TO ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 	
-      targetNamespace="http://www.onem2m.org/xml/protocols" 
-      xmlns:m2m="http://www.onem2m.org/xml/protocols"
-      elementFormDefault="unqualified" attributeFormDefault="unqualified" >   
-  
-    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" /> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:m2m="http://www.onem2m.org/xml/protocols"
+           targetNamespace="http://www.onem2m.org/xml/protocols"
+           elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
 
     <xs:element name="activeCmdhPolicy">
-      <xs:complexType>
-        <xs:complexContent>
-          <!-- Inherit Common Attributes from regularResourceType  -->
-          <xs:extension base="m2m:mgmtResource">
-	           <xs:sequence>
-              <!-- Resource Specific Attributes -->
-	            <xs:element name="activeCmdhPolicyLink" type="m2m:ID" />	
-            </xs:sequence>
-          </xs:extension>  
-        </xs:complexContent> 	       
-      </xs:complexType>
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from regularResourceType  -->
+                <xs:extension base="m2m:mgmtResource">
+                    <xs:sequence>
+                        <!-- Resource Specific Attributes -->
+                        <xs:element name="activeCmdhPolicyLink" type="m2m:ID"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
     </xs:element>
 </xs:schema> 
 

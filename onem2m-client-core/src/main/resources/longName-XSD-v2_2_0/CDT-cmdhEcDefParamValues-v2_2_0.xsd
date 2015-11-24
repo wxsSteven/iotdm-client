@@ -23,29 +23,29 @@ WITH RESPECT TO ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 	
-  targetNamespace="http://www.onem2m.org/xml/protocols" 
-  xmlns:m2m="http://www.onem2m.org/xml/protocols"
-  elementFormDefault="unqualified" attributeFormDefault="unqualified" >   
-  
-  <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" /> 
-  
-  <xs:element name="cmdhEcDefParamValues">    
-    <xs:complexType>     
-      <xs:complexContent>
-        <!-- Inherit Common Attributes from data type "mgmtResource" -->
-        <xs:extension base="m2m:mgmtResource">
-          <xs:sequence>
-            <!-- mgmtObj specialization-specific Attributes -->
-            <xs:element name="applicableEventCategory" type="m2m:listOfEventCatWithDef" />
-            <xs:element name="defaultRequestExpTime" type="xs:long" />  <!-- units in milliseconds -->
-            <xs:element name="defaultResultExpTime" type="xs:long" /> <!-- units in milliseconds -->
-            <xs:element name="defaultOpExecTime" type="xs:long" /> <!-- units in milliseconds -->
-            <xs:element name="defaultRespPersistence" type="xs:long" /> <!-- units in milliseconds -->
-            <xs:element name="defaultDelAggregation" type="xs:boolean" />
-          </xs:sequence>
-        </xs:extension>  
-      </xs:complexContent> 	    
-    </xs:complexType>
-  </xs:element>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:m2m="http://www.onem2m.org/xml/protocols"
+           targetNamespace="http://www.onem2m.org/xml/protocols"
+           elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+
+    <xs:element name="cmdhEcDefParamValues">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from data type "mgmtResource" -->
+                <xs:extension base="m2m:mgmtResource">
+                    <xs:sequence>
+                        <!-- mgmtObj specialization-specific Attributes -->
+                        <xs:element name="applicableEventCategory" type="m2m:listOfEventCatWithDef"/>
+                        <xs:element name="defaultRequestExpTime" type="xs:long"/>  <!-- units in milliseconds -->
+                        <xs:element name="defaultResultExpTime" type="xs:long"/> <!-- units in milliseconds -->
+                        <xs:element name="defaultOpExecTime" type="xs:long"/> <!-- units in milliseconds -->
+                        <xs:element name="defaultRespPersistence" type="xs:long"/> <!-- units in milliseconds -->
+                        <xs:element name="defaultDelAggregation" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema> 

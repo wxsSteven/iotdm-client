@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?> 
+<?xml version="1.0" encoding="utf-8"?>
 <!-- 
 Copyright Notification
 
@@ -23,29 +23,31 @@ WITH RESPECT TO ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema targetNamespace="http://www.onem2m.org/xml/protocols" xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">   
-  
-  <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/> 
-  
-  <xs:element name="cmbf">
-    <xs:complexType>
-      <xs:complexContent>
-        <!-- Inherit Common Attributes from data type "mgmtResource" -->
-        <xs:extension base="m2m:mgmtResource">
-          <xs:sequence>
-            <!-- mgmtObj specialization-specific Attributes --> 
-            <xs:element name="aec" type="m2m:listOfEventCatWithDef"/>
-            <xs:element name="mbfs" type="xs:nonNegativeInteger"/>  <!-- unit in bytes -->
-            <xs:element name="sgp">
-               <xs:simpleType>
-                 <xs:restriction base="xs:positiveInteger">
-                   <xs:maxExclusive value="11"/>
-                 </xs:restriction>
-               </xs:simpleType>
-            </xs:element>       
-          </xs:sequence>
-        </xs:extension>  
-      </xs:complexContent> 	
-    </xs:complexType>
-  </xs:element>
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.onem2m.org/xml/protocols" attributeFormDefault="unqualified"
+           elementFormDefault="unqualified">
+
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+
+    <xs:element name="cmbf">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from data type "mgmtResource" -->
+                <xs:extension base="m2m:mgmtResource">
+                    <xs:sequence>
+                        <!-- mgmtObj specialization-specific Attributes -->
+                        <xs:element name="aec" type="m2m:listOfEventCatWithDef"/>
+                        <xs:element name="mbfs" type="xs:nonNegativeInteger"/>  <!-- unit in bytes -->
+                        <xs:element name="sgp">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:positiveInteger">
+                                    <xs:maxExclusive value="11"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

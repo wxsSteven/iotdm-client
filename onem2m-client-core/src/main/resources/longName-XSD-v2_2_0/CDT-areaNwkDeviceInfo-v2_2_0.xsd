@@ -22,62 +22,62 @@ ANY CLAIM, AND IN NO EVENT SHALL oneM2M BE LIABLE FOR LOST PROFITS OR OTHER INCI
 oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PROVIDED IN THIS DOCUMENT IS AT THE RISK OF THE USER.
 
 -->
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"  
-	xmlns:m2m="http://www.onem2m.org/xml/protocols" elementFormDefault="unqualified" 
-	attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">	
-	
-	<xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" />
-	<xs:include schemaLocation="CDT-subscription-v2_2_0.xsd" />
-	
-	<xs:element name="areaNwkDeviceInfo">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit Common Attributes from mgmtResource -->
-				<xs:extension base="m2m:mgmtResource">
-					<!-- Resource Specific Attributes -->
-					<xs:sequence>
-						<xs:element name="devID" type="xs:string" />
-						<xs:element name="devType" type="xs:string" />
-						<xs:element name="areaNwkId" type="xs:anyURI" />
-						<xs:element name="sleepInterval" type="xs:nonNegativeInteger" minOccurs="0" />
-						<xs:element name="sleepDuration" type="xs:nonNegativeInteger" minOccurs="0" />
-						<xs:element name="devStatus" type="xs:string" minOccurs="0" />
-						<xs:element name="listOfNeighbors" type="m2m:listOfURIs" />
-		     
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />   
-						</xs:choice>             
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	
-	<xs:element name="areaNwkDeviceInfoAnnc">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit Common Attributes from announcedMgmtResource -->
-				<xs:extension base="m2m:announcedMgmtResource">
-					<!-- Resource Specific Attributes -->
-					<xs:sequence>
-						<xs:element name="devID" type="xs:string" minOccurs="0" />
-						<xs:element name="devType" type="xs:string" minOccurs="0" />
-						<xs:element name="areaNwkId" type="xs:anyURI" minOccurs="0" />
-						<xs:element name="sleepInterval" type="xs:nonNegativeInteger" minOccurs="0" />
-						<xs:element name="sleepDuration" type="xs:nonNegativeInteger" minOccurs="0" />
-						<xs:element name="devStatus" type="xs:string" minOccurs="0" />
-						<xs:element name="listOfNeighbors" type="m2m:listOfURIs" minOccurs="0" />
-		     
-						<!-- Child Resources -->
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />   
-						</xs:choice>             
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
+           elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+    <xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
+
+    <xs:element name="areaNwkDeviceInfo">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from mgmtResource -->
+                <xs:extension base="m2m:mgmtResource">
+                    <!-- Resource Specific Attributes -->
+                    <xs:sequence>
+                        <xs:element name="devID" type="xs:string"/>
+                        <xs:element name="devType" type="xs:string"/>
+                        <xs:element name="areaNwkId" type="xs:anyURI"/>
+                        <xs:element name="sleepInterval" type="xs:nonNegativeInteger" minOccurs="0"/>
+                        <xs:element name="sleepDuration" type="xs:nonNegativeInteger" minOccurs="0"/>
+                        <xs:element name="devStatus" type="xs:string" minOccurs="0"/>
+                        <xs:element name="listOfNeighbors" type="m2m:listOfURIs"/>
+
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="areaNwkDeviceInfoAnnc">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit Common Attributes from announcedMgmtResource -->
+                <xs:extension base="m2m:announcedMgmtResource">
+                    <!-- Resource Specific Attributes -->
+                    <xs:sequence>
+                        <xs:element name="devID" type="xs:string" minOccurs="0"/>
+                        <xs:element name="devType" type="xs:string" minOccurs="0"/>
+                        <xs:element name="areaNwkId" type="xs:anyURI" minOccurs="0"/>
+                        <xs:element name="sleepInterval" type="xs:nonNegativeInteger" minOccurs="0"/>
+                        <xs:element name="sleepDuration" type="xs:nonNegativeInteger" minOccurs="0"/>
+                        <xs:element name="devStatus" type="xs:string" minOccurs="0"/>
+                        <xs:element name="listOfNeighbors" type="m2m:listOfURIs" minOccurs="0"/>
+
+                        <!-- Child Resources -->
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

@@ -14,7 +14,7 @@ import org.opendaylight.iotdm.client.api.Client;
 public class HttpTest {
 
     @Rule
-    public JUnitRuleMockery context = new JUnitRuleMockery(){{
+    public JUnitRuleMockery context = new JUnitRuleMockery() {{
         setImposteriser(ClassImposteriser.INSTANCE);
     }};
 

@@ -23,68 +23,68 @@ oneM2M EXPRESSLY ADVISES ANY AND ALL USE OF OR RELIANCE UPON THIS INFORMATION PR
 
 -->
 
-<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.onem2m.org/xml/protocols"
-	xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	elementFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:m2m="http://www.onem2m.org/xml/protocols" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.onem2m.org/xml/protocols" elementFormDefault="unqualified">
 
-	<xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd" />
-	<xs:include schemaLocation="CDT-subscription-v2_2_0.xsd" />
+    <xs:include schemaLocation="CDT-commonTypes-v2_2_0.xsd"/>
+    <xs:include schemaLocation="CDT-subscription-v2_2_0.xsd"/>
 
-	<xs:element name="group">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes for announceable Resources -->
-				<xs:extension base="m2m:announceableResource">
-					<!-- Resource Specific Attributes -->
-					<xs:sequence>					
-                        <xs:element name="creator" type="m2m:ID" minOccurs="0" />					
-						<xs:element name="memberType" type="m2m:memberType" />
-						<xs:element name="currentNrOfMembers" type="xs:nonNegativeInteger" />
-						<xs:element name="maxNrOfMembers" type="xs:nonNegativeInteger" />
-						<xs:element name="memberIDs" type="m2m:listOfURIs" />
-						<xs:element name="membersAccessControlPolicyIDs" type="m2m:listOfURIs" minOccurs="0" />
-						<xs:element name="memberTypeValidated" type="xs:boolean" />
-						<xs:element name="consistencyStrategy" type="m2m:consistencyStrategy" minOccurs="0" />
-						<xs:element name="groupName" type="xs:string" minOccurs="0" />
-						
-						<!-- Child Resources -->
-						<xs:element name="fanOutPoint" type="xs:anyURI" />
+    <xs:element name="group">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes for announceable Resources -->
+                <xs:extension base="m2m:announceableResource">
+                    <!-- Resource Specific Attributes -->
+                    <xs:sequence>
+                        <xs:element name="creator" type="m2m:ID" minOccurs="0"/>
+                        <xs:element name="memberType" type="m2m:memberType"/>
+                        <xs:element name="currentNrOfMembers" type="xs:nonNegativeInteger"/>
+                        <xs:element name="maxNrOfMembers" type="xs:nonNegativeInteger"/>
+                        <xs:element name="memberIDs" type="m2m:listOfURIs"/>
+                        <xs:element name="membersAccessControlPolicyIDs" type="m2m:listOfURIs" minOccurs="0"/>
+                        <xs:element name="memberTypeValidated" type="xs:boolean"/>
+                        <xs:element name="consistencyStrategy" type="m2m:consistencyStrategy" minOccurs="0"/>
+                        <xs:element name="groupName" type="xs:string" minOccurs="0"/>
 
-						<xs:choice minOccurs="0" maxOccurs="1">
-							<xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-							<xs:element ref="m2m:subscription" maxOccurs="unbounded" />
-						</xs:choice>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+                        <!-- Child Resources -->
+                        <xs:element name="fanOutPoint" type="xs:anyURI"/>
 
-	<xs:element name="groupAnnc">
-		<xs:complexType>
-			<xs:complexContent>
-				<!-- Inherit common attributes for announced Resources -->
-				<xs:extension base="m2m:announcedResource">
-					<!-- Resource Specific Attributes -->
-					<xs:sequence>
-						<xs:element name="memberType" type="m2m:memberType" minOccurs="0" />
-						<xs:element name="currentNrOfMembers" type="xs:nonNegativeInteger" minOccurs="0" />
-						<xs:element name="maxNrOfMembers" type="xs:nonNegativeInteger" minOccurs="0" />
-						<xs:element name="memberIDs" type="m2m:listOfURIs" minOccurs="0" />
-						<xs:element name="membersAccessControlPolicyIDs" type="m2m:listOfURIs" minOccurs="0" />
-						<xs:element name="memberTypeValidated" type="xs:boolean" minOccurs="0" />
-						<xs:element name="consistencyStrategy" type="m2m:consistencyStrategy" minOccurs="0" />
-						<xs:element name="groupName" type="xs:string" minOccurs="0" />
-						
-					    <!-- Child Resources -->
-     
                         <xs:choice minOccurs="0" maxOccurs="1">
-                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded" />
-                            <xs:element ref="m2m:subscription" maxOccurs="unbounded" />
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
                         </xs:choice>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="groupAnnc">
+        <xs:complexType>
+            <xs:complexContent>
+                <!-- Inherit common attributes for announced Resources -->
+                <xs:extension base="m2m:announcedResource">
+                    <!-- Resource Specific Attributes -->
+                    <xs:sequence>
+                        <xs:element name="memberType" type="m2m:memberType" minOccurs="0"/>
+                        <xs:element name="currentNrOfMembers" type="xs:nonNegativeInteger" minOccurs="0"/>
+                        <xs:element name="maxNrOfMembers" type="xs:nonNegativeInteger" minOccurs="0"/>
+                        <xs:element name="memberIDs" type="m2m:listOfURIs" minOccurs="0"/>
+                        <xs:element name="membersAccessControlPolicyIDs" type="m2m:listOfURIs" minOccurs="0"/>
+                        <xs:element name="memberTypeValidated" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="consistencyStrategy" type="m2m:consistencyStrategy" minOccurs="0"/>
+                        <xs:element name="groupName" type="xs:string" minOccurs="0"/>
+
+                        <!-- Child Resources -->
+
+                        <xs:choice minOccurs="0" maxOccurs="1">
+                            <xs:element name="childResource" type="m2m:childResourceRef" maxOccurs="unbounded"/>
+                            <xs:element ref="m2m:subscription" maxOccurs="unbounded"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

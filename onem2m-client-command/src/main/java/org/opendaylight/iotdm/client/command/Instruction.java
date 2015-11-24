@@ -5,5 +5,6 @@ package org.opendaylight.iotdm.client.command;
  */
 public interface Instruction {
     public void execute();
+
     public void parse(String instruction);
 }

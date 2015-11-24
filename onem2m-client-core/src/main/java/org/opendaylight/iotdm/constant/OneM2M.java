@@ -6,9 +6,11 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
-import java.time.*;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by wenxshi on 4/2/15.
@@ -19,22 +21,7 @@ public class OneM2M {
     public static final String PRIMITIVE_PACKAGE = "org.onem2m.xml.protocols";
     public static final String NAMESPACE_DELIMITER = ":";
 
-    public static final String ERROR_INDICATOR="error";
-
-    public static class MIME {
-        public static final String VND_ONEM2M_RES_XML = "vnd.onem2m-res+xml";
-        public static final String VND_ONEM2M_RES_JSON = "vnd.onem2m-res+json";
-
-
-        public static final String VND_ONEM2M_NTFY_XML = "vnd.onem2m-ntfy+xml";
-        public static final String VND_ONEM2M_NTFY_JSON = "vnd.onem2m-ntfy+json";
-
-        public static final String VND_ONEM2M_PREQ_XML = "vnd.onem2m-PREQ+xml";
-        public static final String VND_ONEM2M_PREQ_JSON = "vnd.onem2m-PREQ+json";
-
-        public static final String VND_ONEM2M_PRSP_XML = "vnd.onem2m-PRSP+xml";
-        public static final String VND_ONEM2M_PRSP_JSON = "vnd.onem2m-PRSP+json";
-    }
+    public static final String ERROR_INDICATOR = "error";
 
     public enum Operation {
         CREATE(BigInteger.valueOf(1)),
@@ -49,10 +36,6 @@ public class OneM2M {
             this.operation = operation;
         }
 
-        public BigInteger value() {
-            return operation;
-        }
-
         public static Operation getEnum(BigInteger value) {
             for (Operation o : Operation.values()) {
                 if (o.value().equals(value)) {
@@ -61,8 +44,11 @@ public class OneM2M {
             }
             return null;
         }
-    }
 
+        public BigInteger value() {
+            return operation;
+        }
+    }
 
     public enum ConsistencyStrategy {
         ABANDON_MEMBER(BigInteger.valueOf(1)),
@@ -79,6 +65,7 @@ public class OneM2M {
             return value;
         }
     }
+
 
     public enum EncodingType {
         PLAIN(BigInteger.valueOf(0)),
@@ -171,7 +158,6 @@ public class OneM2M {
         }
     }
 
-
     public enum LogStatus {
         STARTED(BigInteger.valueOf(1)),
         STOPPED(BigInteger.valueOf(2)),
@@ -190,6 +176,7 @@ public class OneM2M {
             return value;
         }
     }
+
 
     public enum LogTypeId {
         SYSTEM(BigInteger.valueOf(1)),
@@ -448,16 +435,16 @@ public class OneM2M {
             this.value = value;
         }
 
-        public BigInteger value() {
-            return value;
-        }
-
         public static StdEventCats getEnum(BigInteger number) {
-            for ( StdEventCats  code: StdEventCats.values()) {
+            for (StdEventCats code : StdEventCats.values()) {
                 if (code.value.equals(number))
                     return code;
             }
             return null;
+        }
+
+        public BigInteger value() {
+            return value;
         }
     }
 
@@ -501,7 +488,6 @@ public class OneM2M {
             return value;
         }
     }
-
 
     public enum ExecResultType {
         STATUS_REQUEST_UNSUPPORTED(BigInteger.valueOf(1)),
@@ -547,6 +533,7 @@ public class OneM2M {
             return value;
         }
     }
+
 
     public enum DiscResType {
         STRUCTURED(BigInteger.valueOf(1)),
@@ -761,6 +748,21 @@ public class OneM2M {
             return value;
         }
 
+    }
+
+    public static class MIME {
+        public static final String VND_ONEM2M_RES_XML = "vnd.onem2m-res+xml";
+        public static final String VND_ONEM2M_RES_JSON = "vnd.onem2m-res+json";
+
+
+        public static final String VND_ONEM2M_NTFY_XML = "vnd.onem2m-ntfy+xml";
+        public static final String VND_ONEM2M_NTFY_JSON = "vnd.onem2m-ntfy+json";
+
+        public static final String VND_ONEM2M_PREQ_XML = "vnd.onem2m-PREQ+xml";
+        public static final String VND_ONEM2M_PREQ_JSON = "vnd.onem2m-PREQ+json";
+
+        public static final String VND_ONEM2M_PRSP_XML = "vnd.onem2m-PRSP+xml";
+        public static final String VND_ONEM2M_PRSP_JSON = "vnd.onem2m-PRSP+json";
     }
 
     public static class Name {
@@ -1682,6 +1684,21 @@ public class OneM2M {
         private long relativeTime;
         private boolean isRelativetime;
 
+        public Time(String localDateTime) {
+            this.localDateTime = LocalDateTime.parse(localDateTime);
+            isRelativetime = false;
+        }
+
+        public Time(LocalDateTime localDateTime) {
+            this.localDateTime = localDateTime;
+            isRelativetime = false;
+        }
+
+        public Time(long relativeTime) {
+            this.relativeTime = relativeTime;
+            isRelativetime = true;
+        }
+
         public static final String currentTime() {
             LocalDateTime localDateTime = LocalDateTime.now();
             String time = localDateTime.format(FORMATTER);
@@ -1700,22 +1717,6 @@ public class OneM2M {
         public static final String format(LocalDateTime localDateTime) {
             String time = localDateTime.format(FORMATTER);
             return time.replace(FAKE_SEPARATOR, SEPARATOR);
-        }
-
-        public Time(String localDateTime) {
-            this.localDateTime = LocalDateTime.parse(localDateTime);
-            isRelativetime = false;
-        }
-
-
-        public Time(LocalDateTime localDateTime) {
-            this.localDateTime = localDateTime;
-            isRelativetime = false;
-        }
-
-        public Time(long relativeTime) {
-            this.relativeTime = relativeTime;
-            isRelativetime = true;
         }
 
         public String toString() {
