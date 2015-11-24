@@ -1,0 +1,8 @@
+org.onem2m.xml.protocols
+org.opendaylight.iotdm.client
+org.opendaylight.iotdm.client.api
+org.opendaylight.iotdm.client.exception
+org.opendaylight.iotdm.client.impl
+org.opendaylight.iotdm.client.util
+org.opendaylight.iotdm.constant
+org.w3._2001.xmlschema
