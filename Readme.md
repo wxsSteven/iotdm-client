@@ -6,3 +6,5 @@ Iotdm-client has three modules.
 (2)onem2m-client-core (Version 2.0.1)
 
 (3)onem2m-client-gui (Under construction)
+
+[Java API](http://wxssteven.github.io/iotdm-client/)
