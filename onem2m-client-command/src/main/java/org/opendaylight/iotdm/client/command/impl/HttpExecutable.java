@@ -5,10 +5,10 @@ import org.opendaylight.iotdm.client.api.Client;
 import org.opendaylight.iotdm.client.command.ArgumentFactory;
 import org.opendaylight.iotdm.client.command.ExecutableFactory;
 import org.opendaylight.iotdm.client.command.Logger;
+import org.opendaylight.iotdm.client.command.api.Argument;
 import org.opendaylight.iotdm.client.command.api.Creator;
 import org.opendaylight.iotdm.client.command.api.Executable;
 import org.opendaylight.iotdm.client.command.api.Interpret;
-import org.opendaylight.iotdm.client.command.exception.NoArgumentError;
 import org.opendaylight.iotdm.client.command.exception.NoValueOfArgumentError;
 import org.opendaylight.iotdm.client.impl.Http;
 import org.opendaylight.iotdm.client.util.Json;
@@ -44,19 +44,15 @@ public class HttpExecutable implements Executable,Interpret,Creator{
     }
 
     public Executable interpret(String... args) {
-        if (args == null || args.length == 0)
-            throw new NoArgumentError();
-
         int i = 0;
         while (i < args.length) {
-            if (i + 1 < args.length) {
-                String key = args[i];
-                i++;
+            String key = args[i++];
+            Argument argument=ArgumentFactory.getInstance().getCreator(key);
+            if (i < args.length) {
                 String value = args[i];
-                i++;
-                arguments.add(ArgumentFactory.getInstance().getCreator(key).create(request).interpret(value));
+                arguments.add(argument.create(request).interpret(value));
             } else {
-                throw new NoValueOfArgumentError(args[i]);
+                throw new NoValueOfArgumentError(key);
             }
         }
         return this;

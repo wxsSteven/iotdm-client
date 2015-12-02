@@ -4,6 +4,7 @@ import org.opendaylight.iotdm.client.Request;
 import org.opendaylight.iotdm.client.api.Client;
 import org.opendaylight.iotdm.client.command.ArgumentFactory;
 import org.opendaylight.iotdm.client.command.ExecutableFactory;
+import org.opendaylight.iotdm.client.command.Logger;
 import org.opendaylight.iotdm.client.command.api.Argument;
 import org.opendaylight.iotdm.client.command.api.Executable;
 import org.opendaylight.iotdm.client.command.api.Creator;
@@ -39,24 +40,20 @@ public class CoapExecutable implements Executable, Interpret, Creator {
         for (Executable arg : arguments)
             arg.execute();
         client.start();
-        System.out.println(Json.newInstance().toJson(client.send(request)));
+        Logger.log(Json.newInstance().toJson(client.send(request)));
         client.stop();
     }
 
     public Executable interpret(String... args) {
-        if (args == null || args.length == 0)
-            throw new NoArgumentError();
-
         int i = 0;
         while (i < args.length) {
-            if (i + 1 < args.length) {
-                String key = args[i];
-                i++;
+            String key = args[i++];
+            Argument argument=ArgumentFactory.getInstance().getCreator(key);
+            if (i < args.length) {
                 String value = args[i];
-                i++;
-                arguments.add(ArgumentFactory.getInstance().getCreator(key).create(request).interpret(value));
+                arguments.add(argument.create(request).interpret(value));
             } else {
-                throw new NoValueOfArgumentError(args[i]);
+                throw new NoValueOfArgumentError(key);
             }
         }
         return this;

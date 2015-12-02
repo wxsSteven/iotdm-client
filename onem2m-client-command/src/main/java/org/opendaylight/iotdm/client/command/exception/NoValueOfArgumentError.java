@@ -5,6 +5,6 @@ package org.opendaylight.iotdm.client.command.exception;
  */
 public class NoValueOfArgumentError extends AssertionError {
     public NoValueOfArgumentError(String name){
-        super(String.format("%name doesn't have value"));
+        super(String.format("%s doesn't have value",name));
     }
 }
