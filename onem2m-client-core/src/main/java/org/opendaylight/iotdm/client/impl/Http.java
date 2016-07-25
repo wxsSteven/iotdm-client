@@ -56,7 +56,6 @@ public class Http implements Client {
     public Response send(Request request) {
 
         org.eclipse.jetty.client.api.Request httpRequest = new HttpRequestBuilder(request).build();
-
         ContentResponse contentResponse;
         try {
             contentResponse = httpRequest.send();
@@ -171,7 +170,11 @@ public class Http implements Client {
                 }
             }
             String content = contentResponse.getContentAsString();
-            primitiveContent = Json.newInstance().fromJson(content, PrimitiveContent.class);
+            try {
+                primitiveContent = Json.newInstance().fromJson(content, PrimitiveContent.class);
+            } catch (Exception e) {
+                System.err.println("Failed to decode primitive content: " + e);
+            }
 
             response = new Response(responseStatusCode, requestIdentifier, primitiveContent, to, from, originatingTimestamp, resultExpirationTimestamp, eventCategory);
         }
