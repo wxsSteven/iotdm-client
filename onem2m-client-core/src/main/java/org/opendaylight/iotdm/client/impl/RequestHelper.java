@@ -28,7 +28,7 @@ public class RequestHelper {
     private HashMap<String, Set<String>> header = new HashMap<>();
     private HashMap<String, Set<String>> fragment = new HashMap<>();
 
-    protected RequestHelper(Request request) {
+    public RequestHelper(Request request) {
         host = request.getHost();
         port = request.getPort();
         timeout = request.getTimeout();

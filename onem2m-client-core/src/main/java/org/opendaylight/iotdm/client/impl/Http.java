@@ -23,14 +23,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class Http implements Client {
 
-    public static final int PORT = 8989;
+//    public static final int PORT = 8989;
     public static final String CREATE_IN_HTTP = "post";
     public static final String RETRIEVE_IN_HTTP = "get";
     public static final String UPDATE_IN_HTTP = "put";
     public static final String DELETE_IN_HTTP = "delete";
     public static final String NOTIFY_IN_HTTP = "post";
 
-    private static HttpClient httpClient = new HttpClient();
+    public HttpClient httpClient = new HttpClient();
 //    private static Server httpServer=new Server(PORT);
 
 
@@ -55,7 +55,7 @@ public class Http implements Client {
     @Override
     public Response send(Request request) {
 
-        org.eclipse.jetty.client.api.Request httpRequest = new HttpRequestBuilder(request).build();
+        org.eclipse.jetty.client.api.Request httpRequest = buildHttpRequest(request);
         ContentResponse contentResponse;
         try {
             contentResponse = httpRequest.send();
@@ -67,68 +67,63 @@ public class Http implements Client {
         return response;
     }
 
-    public static class HttpRequestBuilder {
-        org.eclipse.jetty.client.api.Request httpRequest;
+    public org.eclipse.jetty.client.api.Request buildHttpRequest(Request request) {
+        org.eclipse.jetty.client.api.Request httpRequest = null;
+        if (request == null) return null;
 
-        public HttpRequestBuilder(Request request) {
-            if (request == null) return;
+        RequestHelper requestHelper = new RequestHelper(request);
+        httpRequest = httpClient.newRequest(requestHelper.getHost(), requestHelper.getPort())
+                .timeout(requestHelper.getTimeout(), TimeUnit.MILLISECONDS);
 
-            RequestHelper requestHelper = new RequestHelper(request);
-            httpRequest = httpClient.newRequest(requestHelper.getHost(), requestHelper.getPort())
-                    .timeout(requestHelper.getTimeout(), TimeUnit.MILLISECONDS);
+        requestHelper.getQuery().remove(OneM2M.Name.RESOURCE_TYPE);
+        addQuery(httpRequest, requestHelper.getQuery());
+        addHeader(httpRequest.getHeaders(), requestHelper.getHeader());
+        httpRequest.accept(requestHelper.getAcceptMIME());
+        httpRequest.path(OneM2M.Path.toToPathMapping(requestHelper.getPath()));
 
-            requestHelper.getQuery().remove(OneM2M.Name.RESOURCE_TYPE);
-            addQuery(httpRequest, requestHelper.getQuery());
-            addHeader(httpRequest.getHeaders(), requestHelper.getHeader());
-            httpRequest.accept(requestHelper.getAcceptMIME());
-            httpRequest.path(OneM2M.Path.toToPathMapping(requestHelper.getPath()));
-
-            switch (OneM2M.Operation.getEnum(requestHelper.getOp())) {
-                case CREATE:
-                    httpRequest.method(CREATE_IN_HTTP);
-                    httpRequest.content(new StringContentProvider(requestHelper.getPayload()));
-                    httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, String.format("%s;%s=%s", requestHelper.getContentMIME(), OneM2M.Name.RESOURCE_TYPE, request.getRequestPrimitive().getTy()));
-                    break;
-                case RETRIEVE:
-                    httpRequest.method(RETRIEVE_IN_HTTP);
-                    httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
-                    break;
-                case UPDATE:
-                    httpRequest.method(UPDATE_IN_HTTP);
-                    httpRequest.content(new StringContentProvider(requestHelper.getPayload()));
-                    httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
-                    break;
-                case DELETE:
-                    httpRequest.method(DELETE_IN_HTTP);
-                    httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
-                    break;
-                case NOTIFY:
-                    httpRequest.method(NOTIFY_IN_HTTP);
-                    httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
-                    break;
-                default:
-                    throw new Onem2mNoOperationError();
-            }
+        switch (OneM2M.Operation.getEnum(requestHelper.getOp())) {
+            case CREATE:
+                httpRequest.method(CREATE_IN_HTTP);
+                httpRequest.content(new StringContentProvider(requestHelper.getPayload()));
+                httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, String.format("%s;%s=%s", requestHelper.getContentMIME(), OneM2M.Name.RESOURCE_TYPE, request.getRequestPrimitive().getTy()));
+                break;
+            case RETRIEVE:
+                httpRequest.method(RETRIEVE_IN_HTTP);
+                httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
+                break;
+            case UPDATE:
+                httpRequest.method(UPDATE_IN_HTTP);
+                httpRequest.content(new StringContentProvider(requestHelper.getPayload()));
+                httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
+                break;
+            case DELETE:
+                httpRequest.method(DELETE_IN_HTTP);
+                httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
+                break;
+            case NOTIFY:
+                httpRequest.method(NOTIFY_IN_HTTP);
+                httpRequest.header(OneM2M.Http.Header.CONTENT_TYPE, requestHelper.getContentMIME());
+                break;
+            default:
+                throw new Onem2mNoOperationError();
         }
 
-        private void addHeader(HttpFields httpFields, Map<String, Set<String>> map) {
-            for (Map.Entry<String, Set<String>> entry : map.entrySet()) {
-                String key = OneM2M.Http.Header.map(entry.getKey());
-                String value = RequestHelper.concatQuery(entry.getValue());
-                httpFields.add(key, value);
-            }
-        }
+        return httpRequest;
+    }
 
-        private void addQuery(org.eclipse.jetty.client.api.Request request, Map<String, Set<String>> map) {
-            for (Map.Entry<String, Set<String>> entry : map.entrySet()) {
-                String key = entry.getKey();
-                String value = RequestHelper.concatQuery(entry.getValue());
-                request.param(key, value);
-            }
+    protected void addHeader(HttpFields httpFields, Map<String, Set<String>> map) {
+        for (Map.Entry<String, Set<String>> entry : map.entrySet()) {
+            String key = OneM2M.Http.Header.map(entry.getKey());
+            String value = RequestHelper.concatQuery(entry.getValue());
+            httpFields.add(key, value);
         }
+    }
 
-        public org.eclipse.jetty.client.api.Request build() {
-            return httpRequest;
+    protected void addQuery(org.eclipse.jetty.client.api.Request request, Map<String, Set<String>> map) {
+        for (Map.Entry<String, Set<String>> entry : map.entrySet()) {
+            String key = entry.getKey();
+            String value = RequestHelper.concatQuery(entry.getValue());
+            request.param(key, value);
         }
     }
 

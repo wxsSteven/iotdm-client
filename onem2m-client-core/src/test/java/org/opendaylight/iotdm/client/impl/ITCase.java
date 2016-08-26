@@ -59,9 +59,9 @@ public class ITCase {
                 .to("InCSE1")
                 .operation(OneM2M.Operation.CREATE)
                 .resourceType(OneM2M.ResourceType.AE)
-                .from("Test_AE_Local")
+                .from("testAEClient")
                 .requestIdentifier("1234")
-                .name("Test_AE_Local");
+                .name("testAEClient");
 
         Ae ae = new Ae();
         ae.setOr("iphone");
@@ -81,9 +81,9 @@ public class ITCase {
     //InCSE1->AE
     public void update_ae() {
         Request request = newRequest()
-                .to("InCSE1/Test_AE_Local")
+                .to("InCSE1/testAEClient")
                 .operation(OneM2M.Operation.UPDATE)
-                .from("Test_AE_Local")
+                .from("testAEClient")
                 .requestIdentifier("1234");
 
         Ae ae = new Ae();
@@ -101,9 +101,9 @@ public class ITCase {
     //InCSE1->AE
     public void retrieve_ae() {
         Request request = newRequest()
-                .to("InCSE1/Test_AE_Local")
+                .to("InCSE1/testAEClient")
                 .operation(OneM2M.Operation.RETRIEVE)
-                .from("Test_AE_Local")
+                .from("testAEClient")
                 .requestIdentifier("1234");
 
         Response response = client.send(request);
@@ -114,9 +114,9 @@ public class ITCase {
     //InCSE1
     public void delete_ae() {
         Request request = newRequest()
-                .to("InCSE1/Test_AE_Local")
+                .to("InCSE1/testAEClient")
                 .operation(OneM2M.Operation.DELETE)
-                .from("Test_AE_Local")
+                .from("testAEClient")
                 .requestIdentifier("1234");
 
         Response response = client.send(request);
@@ -131,7 +131,7 @@ public class ITCase {
                 .operation(OneM2M.Operation.CREATE)
                 .resourceType(OneM2M.ResourceType.AE)
                 .from("localhost")
-                .name("Test_AE_Local");
+                .name("testAEClient");
 
         Ae ae = new Ae();
         ae.setOr("iphone");
@@ -155,7 +155,7 @@ public class ITCase {
                 .operation(OneM2M.Operation.CREATE)
                 .resourceType(OneM2M.ResourceType.AE)
                 .requestIdentifier("12345")
-                .name("Test_AE_Local");
+                .name("testAEClient");
 
         Ae ae = new Ae();
         ae.setOr("iphone");
@@ -179,8 +179,8 @@ public class ITCase {
                 .to("InCSE1")
                 .operation(OneM2M.Operation.CREATE)
                 .requestIdentifier("1234")
-                .from("Test_AE_Local")
-                .name("Test_AE_Local");
+                .from("testAEClient")
+                .name("testAEClient");
 
         Ae ae = new Ae();
         ae.setOr("iphone");
@@ -203,9 +203,9 @@ public class ITCase {
                 .to("InCSE1")
                 .operation(OneM2M.Operation.CREATE)
                 .resourceType(OneM2M.ResourceType.CONTENT_INSTANCE)
-                .from("Test_AE_Local")
+                .from("testAEClient")
                 .requestIdentifier("1234")
-                .name("Test_AE_Local");
+                .name("testAEClient");
 
         Ae ae = new Ae();
         ae.setOr("iphone");
@@ -228,9 +228,9 @@ public class ITCase {
                 .to("InCSE1")
                 .operation(OneM2M.Operation.CREATE)
                 .resourceType(OneM2M.ResourceType.AE)
-                .from("Test_AE_Local")
+                .from("testAEClient")
                 .requestIdentifier("1234")
-                .name("Test_AE_Local");
+                .name("testAEClient");
 
         Ae ae = new Ae();
         ae.setOr("iphone");
@@ -240,7 +240,7 @@ public class ITCase {
         request.addPrimitiveContent(ae);
         client.send(request);
 
-        request = newRequest().to("InCSE1/Test_AE_Local").operation(OneM2M.Operation.UPDATE).requestIdentifier("1234").from("localhost").resourceType(OneM2M.ResourceType.ACCESS_CONTROL_POLICY);
+        request = newRequest().to("InCSE1/testAEClient").operation(OneM2M.Operation.UPDATE).requestIdentifier("1234").from("localhost").resourceType(OneM2M.ResourceType.ACCESS_CONTROL_POLICY);
         ae.setOr("ipad");
         request.addPrimitiveContent(ae);
         Response response = client.send(request);
@@ -259,7 +259,7 @@ public class ITCase {
                 .resourceType(OneM2M.ResourceType.AE)
                 .from("localhost")
                 .requestIdentifier("1234")
-                .name("Test_AE_Local");
+                .name("testAEClient");
 
         Ae ae = new Ae();
         ae.setOr("iphone");
@@ -269,7 +269,7 @@ public class ITCase {
         request.addPrimitiveContent(ae);
         client.send(request);
 
-        request = newRequest().to("InCSE1/Test_AE_Local").operation(OneM2M.Operation.UPDATE).requestIdentifier("1234").from("localhost").resourceType(OneM2M.ResourceType.ACCESS_CONTROL_POLICY);
+        request = newRequest().to("InCSE1/testAEClient").operation(OneM2M.Operation.UPDATE).requestIdentifier("1234").from("localhost").resourceType(OneM2M.ResourceType.ACCESS_CONTROL_POLICY);
         ae.setOr(Json.STRING_NULL);
         request.addPrimitiveContent(ae);
         Response response = client.send(request);

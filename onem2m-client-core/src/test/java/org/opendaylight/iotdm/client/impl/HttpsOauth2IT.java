@@ -6,12 +6,16 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.opendaylight.iotdm.client.api.Client;
-import org.opendaylight.iotdm.client.impl.oauth2.HttpOauth2;
+import org.opendaylight.iotdm.client.impl.oauth2.HttpsOauth2;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class HttpOauth2IT {
-    static Client client = new HttpOauth2("testAEClient", "testpass");
-    ITCase itCase = new ITCase(client, RestConf.HOST, 8585, 1000);
+public class HttpsOauth2IT {
+
+    private static final String TRUST_STORE_PASSWORD = "clientpasstrust1";
+    private static final String TRUST_STORE_LOCATION = "src/test/java/org/opendaylight/iotdm/client/certs/certs1/client/truststore/clientTrustStore1";
+
+    static Client client = new HttpsOauth2("testAEClient", "testpass", TRUST_STORE_LOCATION, TRUST_STORE_PASSWORD);
+    ITCase itCase = new ITCase(client, RestConf.HOST, 8484, 1000);
 
     @BeforeClass
     public static void suitUp() {
