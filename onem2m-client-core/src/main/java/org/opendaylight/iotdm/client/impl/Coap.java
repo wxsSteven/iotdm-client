@@ -130,7 +130,7 @@ public class Coap implements Client {
 
             OptionSet os = coapResponse.getOptions();
             for (Option option : os.asSortedList()) {
-                int key = option.getIntegerValue();
+                int key = option.getNumber();
                 switch (key) {
                     case OneM2M.CoAP.Option.ONEM2M_RSC:
                         responseStatusCode = OneM2M.ResponseStatusCodes.getEnum(BigInteger.valueOf(option.getIntegerValue()));
