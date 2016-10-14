@@ -10,8 +10,9 @@ import org.opendaylight.iotdm.client.api.Client;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class HttpsIT {
 
-    private static final String TRUST_STORE_PASSWORD = "clientpasstrust1";
-    private static final String TRUST_STORE_LOCATION = "src/test/java/org/opendaylight/iotdm/client/certs/certs1/client/truststore/clientTrustStore1";
+    // It is possible to pass obfuscated password
+    private static final String TRUST_STORE_PASSWORD = "OBF:1ytc1yf21vgz1rqa1z0f1roc1vfv1yf41yta"; //"trustPass";
+    private static final String TRUST_STORE_LOCATION = "src/test/java/org/opendaylight/iotdm/client/certs/trust.jks";
 
     static Client client = new Https(TRUST_STORE_LOCATION, TRUST_STORE_PASSWORD);
     ITCase itCase = new ITCase(client, RestConf.HOST, 8484, 1000);

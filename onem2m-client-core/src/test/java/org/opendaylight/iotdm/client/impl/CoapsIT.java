@@ -6,16 +6,15 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.opendaylight.iotdm.client.api.Client;
-import org.opendaylight.iotdm.client.impl.oauth2.HttpsOauth2;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class HttpsOauth2IT {
+public class CoapsIT {
 
-    // It is possible to pass obfuscated password
-    private static final String TRUST_STORE_PASSWORD = "OBF:1ytc1yf21vgz1rqa1z0f1roc1vfv1yf41yta"; //"trustPass";
+    private static final String TRUST_STORE_PASSWORD = "trustPass";
     private static final String TRUST_STORE_LOCATION = "src/test/java/org/opendaylight/iotdm/client/certs/trust.jks";
+    private static final String CERTIFICATE_NAME = "ca";
 
-    static Client client = new HttpsOauth2("testAEClient", "testpass", TRUST_STORE_LOCATION, TRUST_STORE_PASSWORD);
+    static Client client = new Coaps(TRUST_STORE_LOCATION, TRUST_STORE_PASSWORD, CERTIFICATE_NAME, true);
     ITCase itCase = new ITCase(client, RestConf.HOST, 8484, 1000);
 
     @BeforeClass

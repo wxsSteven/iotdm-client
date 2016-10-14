@@ -32,13 +32,11 @@ public class Coap implements Client {
     public void stop() {
     }
 
-    @Override
-    public Response send(Request request) {
-        org.eclipse.californium.core.coap.Request coapRequest = new CoapRequestBuilder(request).build();
-        coapRequest.send();
+    public Response getOnem2mResponse(org.eclipse.californium.core.coap.Request coapRequest,
+                                      Request onem2mRequest) {
         org.eclipse.californium.core.coap.Response coapResponse;
         try {
-            coapResponse = coapRequest.waitForResponse(request.getTimeout());
+            coapResponse = coapRequest.waitForResponse(onem2mRequest.getTimeout());
             Objects.requireNonNull(coapResponse);
         } catch (InterruptedException e) {
             throw new AssertionError(e.getMessage());
@@ -47,6 +45,13 @@ public class Coap implements Client {
         }
 
         return new ResponseBuilder(coapResponse).build();
+    }
+
+    @Override
+    public Response send(Request request) {
+        org.eclipse.californium.core.coap.Request coapRequest = new CoapRequestBuilder(request).build();
+        coapRequest.send();
+        return getOnem2mResponse(coapRequest, request);
     }
 
     public static class CoapRequestBuilder {
@@ -82,6 +87,8 @@ public class Coap implements Client {
             optionSet.setUriPath(OneM2M.Path.toToPathMapping(requestHelper.getPath()));
             optionSet.setUriHost(requestHelper.getHost());
             optionSet.setUriPort(requestHelper.getPort());
+            optionSet.setContentFormat(OneM2M.CoAP.MIME.map2Int(requestHelper.getContentMIME()));
+            optionSet.setAccept(OneM2M.CoAP.MIME.map2Int(requestHelper.getContentMIME()));
             addQuery(optionSet, requestHelper.getQuery());
             addOption(optionSet, requestHelper.getHeader());
             try {
